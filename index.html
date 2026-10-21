@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Website</title>
+
+    <style>
+
+  html {
+
+      scroll-behavior: smooth;
+  }
+
+  [id] {
+    scroll-margin-top: 120px;
+}
+
+        body {
+            background-color: lavender;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-right: 190px;
+        }
+
+    .hero {
+
+        padding: 50px 20px;
+        background-color: white;
+        border-radius: 30px;
+        box-shadow: 0 4px 20px gray; 
+        max-width: 900px; 
+        margin: 40px auto;
+        line-height: 1.6;    
+}
+
+.about-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px gray;
+    max-width: 900px;
+    margin: 40px auto;
+    line-height: 1.7;
+}
+
+        h1 {
+            color: purple;
+            font-size: 42px;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            color: darkgreen;
+            letter-spacing: 1px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: auto;
+            border: 6px solid purple;
+            border-radius: 20px;
+            padding: 4px;
+            box-shadow: 0 4px 10px gray;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        .book-cover {
+              width: 140px;
+              height: auto;
+              border-radius: 8px;
+        }
+
+        nav {
+            background-color: purple;
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            background-color: transparent;
+            padding: 10px 15px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+            display: inline-block;
+}
+
+nav a:hover {
+    background-color: white;
+    color: purple;
+    border-radius: 8px;
+    transform: translateY(-2px);
+}
+.books-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.book-card {
+    background-color: white;
+    width: auto; 
+    margin: 25px auto;
+    padding: 25px;
+    border: 2px solid purple;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px gray;
+    text-align: left;
+    transition: 0.3s;
+}
+
+ .book-details {
+    background-color: white;
+    padding: 30px;
+    border: 2px solid purple;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px gray;
+    margin: 40px auto;
+    max-width: 750px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.books-intro {
+ 
+    background-color: white;
+    border: 2px solid purple;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px gray;
+    margin: 30px auto;
+}
+
+.contact-box {
+background-color: white;
+border: none;
+padding: 25px;
+border-radius: 15px;
+box-shadow: 0 4px 10px gray;
+margin: 30px auto;
+}
+
+.book-details-text {
+    flex: 1;
+    text-align: left;
+}
+
+.book-details-text p {
+    line-height: 1.6;
+}
+
+.book-details-text h2 {
+    color: purple;
+    margin-bottom: 10px;
+    font-size: 30px;
+}
+
+.book-details-text em {
+    color: gray;
+    font-size: 18px;
+}
+
+.book-cover {
+    width: 250px;
+    height: 320px;
+    transition: 0.3s;
+    flex-shrink: 0;
+}
+
+.book-cover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px gray;
+}
+
+.book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.book-card:hover {
+    transform: translateY(-5px);
+}
+
+.book-button {
+    background-color: purple;
+    color: white;
+    padding: 10px 18px;
+    text-decoration: none;
+    border-radius: 8px;
+    display: inline-block;
+    transition: 0.15s;
+    font-weight: bold;
+}
+
+.book-button:hover {
+    transform: translateY(-3px);
+    background-color: darkgreen;
+}
+
+.book-card h3 {
+    color: purple;
+    font-size: 26px;
+}
+
+.book-card em {
+    color: darkgreen;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+ .book-card p {
+    line-height: 1.6;
+}
+
+@media (max-width: 1000px) {
+
+    .books-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+.contact-box input,
+.contact-box textarea,
+.contact-box button {
+    margin: 10px;
+    display: block;
+}
+
+.contact-box label {
+    display: block;
+    color: purple;
+    font-weight: bold;
+    text-align: left;
+    margin: 10px;
+}
+
+.contact-box input,
+.contact-box textarea {
+    width: 90%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid gray;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.contact-box input:focus,
+.contact-box textarea:focus {
+    border: 2px solid purple;
+    outline: none;
+    box-shadow: 0 0 5px purple;
+}
+
+.contact-box input::placeholder,
+.contact-box textarea::placeholder {
+    color: gray;
+}
+
+.contact-box button {
+    background-color: purple;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 12px 20px;
+    
+}
+
+.contact-box button:hover {
+    background-color: darkgreen;
+}
+
+.contact-box textarea {
+    height: 120px;
+}
+
+footer {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: white;
+    color: purple;
+    font-size: 14px;
+}
+
+    </style>
+
+</head>
+
+<body id="home">
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Me</a>
+        <a href="#books">Books</a>
+        <a href="#home">In Spirit Motherhood</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+<div class="hero">
+
+    <h1>In Spirit Motherhood</h1>
+
+    <h2>Faith • Family • Purpose</h2>
+
+    <p>
+        Welcome to In Spirit Motherhood-a place of faith, family, purpose,
+        and encouragement. Here I share my journey with God, Christian writing,
+        books, and words of hope for those walking through every season of life.
+    </p>
+
+</div> <div class="about-box">
+
+    <h2 id="about">About Me</h2>
+
+    <p>
+
+       My name is Freweyni. I am a mother, Christian author, and woman of faith
+       whose life has been shaped by <strong>God's grace</strong>.Through every season of my journey,
+       I have learned to trust His Word, walk by faith, and find purpose in serving
+       and encouraging others.
+    </p>
+
+</div> 
+
+    <div class="books-intro">
+    <h2 id="books">My Books</h2>
+
+    <p>
+        My writing is rooted in faith and a desire to point readers toward Jesus.
+        Through my books, I share messages of hope, spiritual growth, prayer,
+        God's Word, and the transforming power of His presence.
+    </p>
+
+</div>
+
+<div class="books-grid">
+
+<div class="book-card" id="spirit-of-joy">
+
+    <h3>The Spirit of Joy</h3>
+
+   <p>
+    <em>Joy & Spiritual Authority</em>
+   </p>
+
+   <p>
+
+    A faith-centered book about discovering the joy that comes from God
+    and understanding the spiritual authority believers have through Christ.
+
+    </p>
+
+    <a href="#spirit-of-joy-details" class="book-button">View Book</a>
+
+</div>
+
+<div class="book-card">
+
+    <h3>Mark by the Blood</h3>
+
+    <p>
+        <em>From Eden to Revelation</em>
+    </p>
+
+    <p>
+        A biblical journey through God's plan of redemption,
+        exploring the meaning of the blood from Eden to the saving work
+        of Jesus Christ and the hope revealed in Scripture.
+
+    </p>
+
+<a href="#mark-by-the-blood-details" class="book-button">View Book</a>
+
+</div>
+
+<div class="book-card">
+
+    <h3>Ask According to His Word</h3>
+
+    <p>
+        <em>Jesus Is the Word</em>
+    </p>
+
+    <p>
+        A Christ-centered journey into prayer, Scripture, and trusting God's will,
+        encouraging readers to ask according to His Word and remain close to Jesus
+        through every answer and every season.
+    </p>
+
+    <a href="#ask-according-to-his-word-details" class="book-button">View Book</a>
+ 
+</div>
+
+<div class="book-card">
+
+    <h3>Called to Lead</h3>
+
+    <p>
+        <em>The Heart and Character of Christlike Leadership</em>
+    </p>
+
+    <p>
+        A Christ-centered guide to leadership that explores character,
+        humility, integrity, service, and the responsibility of leading
+        others according to the example of Jesus Christ.
+    </p>
+
+<a href="#called-to-lead-details" class="book-button">View Book</a>
+
+</div>
+
+</div>
+
+<img class="profile-photo" src="red-dress-profile.png" alt="Author profile photo">
+
+<section id="spirit-of-joy-details" class="book-details">
+
+<div class="book-details-text">
+
+<h2>The Spirit of Joy</h2>
+
+<p><em>Joy & Spiritual Authority</em></p>
+
+<p>
+
+A Christ-centered journey into the joy that comes from knowing Jesus
+and understanding the spiritual authority believers have through Him.
+
+</p>
+
+</div>
+
+<div class="book-cover">
+
+<img src="spirit-of-joy-cover.jpg" alt="The Spirit of Joy book cover">
+
+</div>
+
+</section>
+
+<section id="mark-by-the-blood-details" class="book-details">
+
+<div class="book-details-text">
+
+<h2>Mark by the Blood</h2>
+
+<p><em>From Eden to Revelation</em></p>
+
+<p>
+
+A biblical journey through God's plan of redemption,
+exploring the meaning of the blood from Eden to the saving work
+of Jesus Christ and the hope revealed in Scripture.
+
+</p>
+
+</div>
+
+<div class="book-cover">
+
+<img src="mark-by-the-blood-cover.jpg" alt="Mark by the Blood book cover">
+
+</div>
+
+</section>
+
+<section id="ask-according-to-his-word-details" class="book-details">
+
+<div class="book-details-text">
+
+<h2>Ask According to His Word</h2>
+
+<p><em>Jesus Is the Word</em></p>
+
+<p>
+A Christ-centered journey into prayer, Scripture, and trusting God's will,
+encouraging readers to ask according to His Word and remain close to Jesus
+through every answer and every season.
+
+</p>
+
+</div>
+
+<div class="book-cover">
+
+<img src="ask-according-to-his-word-cover.jpg" alt="Ask According to His Word book cover"> 
+
+</div>
+
+</section>
+
+<section id="called-to-lead-details" class="book-details">
+
+<div class="book-details-text">
+
+<h2>Called to Lead</h2>
+
+<p><em>The Heart and Character of Christlike Leadership</em></p>
+
+<p>
+
+A Christ-centered guide to leadership that explores character,
+humility, integrity, service, and the responsibility of leading
+others according to the example of Jesus Christ.
+
+</p>
+
+</div>
+
+<div class="book-cover">
+
+<img src="called-to-lead-cover.jpg" alt="Called to Lead book cover">
+
+</div>
+
+</section> 
+   
+    <div class="contact-box">
+
+    <h2 id="contact">Contact</h2>
+    
+    <p>
+       I would love to hear from you. Thank you for visiting In Spirit Motherhood.
+    </p>
+
+    <p>
+
+       I look forward to staying connected and sharing this journey
+       of faith, family, and purpose with you.
+
+    </p>
+
+<form action="https://formspree.io/f/xqpeoweq" method="POST">
+
+<label for="name">Name</label>
+<input type="text" id="name" name="name" placeholder="Your Name" required>
+
+<label for="email">Email</label>
+<input type="email" id="email" name="email" placeholder="Your Email" required>
+
+<label for="message">Message</label>
+<textarea id="message" name="message" placeholder="Your Message" required></textarea>
+
+<button type="submit">Send Message</button>
+
+</form>
+
+</div>
+
+<footer>
+
+    <p>&copy; 2026 In Spirit Motherhood. All Rights Reserved.</p>
+
+</footer>
+
+</body>
+
+</html>
