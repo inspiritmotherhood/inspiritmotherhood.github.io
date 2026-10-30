@@ -1554,8 +1554,46 @@ document.getElementById('daily-devotion').textContent =
 
 document.getElementById('daily-prayer').textContent =
     todaysDevotional.prayer;
+
+const listenPrayerButton = document.getElementById('listen-prayer');
+
+listenPrayerButton.addEventListener('click', function() {
+
+    if (!('speechSynthesis' in window)) {
+        alert('Audio prayer is not supported by this browser.');
+        return;
+    }
+
+    if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        listenPrayerButton.textContent = "▶ Listen to Today's Prayer";
+        return;
+    }
+
+    const prayerVoice = new SpeechSynthesisUtterance(
+        todaysDevotional.prayer
+    );
+
+    prayerVoice.rate = 0.9;
+    prayerVoice.pitch = 1;
+
+    prayerVoice.onstart = function() {
+        listenPrayerButton.textContent = "■ Stop Prayer";
+    };
+
+    prayerVoice.onend = function() {
+        listenPrayerButton.textContent = "▶ Listen to Today's Prayer";
+    };
+
+    prayerVoice.onerror = function() {
+        listenPrayerButton.textContent = "▶ Listen to Today's Prayer";
+    };
+
+    window.speechSynthesis.speak(prayerVoice);
+});
+
 </script>
 
 </body>
-
+    
 </html>
