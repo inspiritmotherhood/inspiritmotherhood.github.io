@@ -498,6 +498,118 @@ footer {
     font-size: 14px;
 }
 
+/* ========================================
+   WHAT DO YOU NEED TODAY?
+   Interactive Ministry Section
+======================================== */
+
+.need-today {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 50px 30px;
+    background: linear-gradient(135deg, #ffffff, #f5f0ff);
+    border-radius: 24px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.10);
+    text-align: center;
+}
+
+.need-today h2 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+.need-today > p {
+    max-width: 700px;
+    margin: 0 auto 35px;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+
+.need-options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.need-options button {
+    padding: 18px 20px;
+    border: 1px solid rgba(80, 60, 120, 0.18);
+    border-radius: 14px;
+    background: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+}
+
+.need-options button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    background: #faf7ff;
+}
+
+/* Phone and small-screen layout */
+@media (max-width: 700px) {
+    .need-today {
+        margin: 30px 15px;
+        padding: 35px 18px;
+    }
+
+    .need-today h2 {
+        font-size: 1.8rem;
+    }
+
+    .need-options {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Response displayed after a visitor chooses a need */
+.need-response {
+    max-width: 760px;
+    margin: 30px auto 0;
+}
+
+.response-card {
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 18px;
+    border-left: 5px solid #6f4b8b;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+    text-align: left;
+    animation: responseFadeIn 0.4s ease;
+}
+
+.response-card h3 {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-top: 0;
+}
+
+.response-card h4 {
+    margin-top: 24px;
+}
+
+.response-card p {
+    line-height: 1.8;
+}
+
+@keyframes responseFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+        
     </style>
 
 </head>
@@ -525,7 +637,33 @@ footer {
         books, and words of hope for those walking through every season of life.
     </p>
 
-</div> <div class="about-box">
+</div>
+
+<!-- WHAT DO YOU NEED TODAY? -->
+<section class="need-today" id="start-here">
+    <h2>What Do You Need Today?</h2>
+
+    <p>
+        Whatever season you are walking through, you do not have to walk through it alone.
+        Choose what is on your heart today and find encouragement rooted in the Word of God.
+    </p>
+
+<div class="need-options">
+    <button>I Need Prayer</button>
+    <button type="button" data-need="peace">I Need Peace</button>
+    <button>My Family Needs Healing</button>
+    <button>I Am Grieving</button>
+    <button>I Feel Alone</button>
+    <button>I Need Strength</button>
+    <button>I Need Encouragement</button>
+    <button>I Want to Grow Closer to God</button>
+</div>
+
+<div id="need-response" class="need-response" aria-live="polite"></div>
+    
+</section>
+
+<div class="about-box">
 
     <h2 id="about">About Me</h2>
 
@@ -539,7 +677,7 @@ footer {
     
     <img class="profile-photo" src="red-dress-profile.png" alt="Freweyni, author of In Spirit Motherhood">
     
-</div>
+</div>    
     
     <div class="books-intro">
         
@@ -1133,6 +1271,49 @@ others according to the example of Jesus Christ.
     <p>&copy; 2026 In Spirit Motherhood. All Rights Reserved.</p>
 
 </footer>
+
+<script>
+    const peaceButton = document.querySelector('[data-need="peace"]');
+    const needResponse = document.getElementById('need-response');
+
+    peaceButton.addEventListener('click', function () {
+        needResponse.innerHTML = `
+            <div class="response-card">
+                <h3>Peace for Your Heart</h3>
+
+                <p>
+                    <strong>
+                        "Peace I leave with you, my peace I give unto you:
+                        not as the world giveth, give I unto you."
+                        — John 14:27 (KJV)
+                    </strong>
+                </p>
+
+                <p>
+                    Whatever is weighing on your heart today, bring it before Jesus.
+                    His peace is not dependent on everything around you becoming perfect.
+                    Christ meets us in the middle of uncertainty and reminds us that
+                    we are not walking alone.
+                </p>
+
+                <h4>Let Us Pray</h4>
+
+                <p>
+                    Lord Jesus, quiet my heart and help me rest in Your presence.
+                    Where there is fear, give me faith. Where there is confusion,
+                    give me wisdom. Where there is heaviness, surround me with Your
+                    peace. Help me trust You with what I cannot control and remember
+                    that You are with me. In Jesus' name, Amen.
+                </p>
+            </div>
+        `;
+
+        needResponse.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest'
+        });
+    });
+</script>
 
 </body>
 
