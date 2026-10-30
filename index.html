@@ -1834,6 +1834,76 @@ if (currentHourlyPrayer) {
         currentHourlyPrayer.prayer;
 }
 
+/* ========================================
+   HOURLY PRAYER AUDIO
+======================================== */
+
+const listenHourlyPrayerButton =
+    document.getElementById('listen-hourly-prayer');
+
+listenHourlyPrayerButton.addEventListener('click', function() {
+
+    if (!currentHourlyPrayer) {
+        return;
+    }
+
+    if (!('speechSynthesis' in window)) {
+        alert('Audio prayer is not supported by this browser.');
+        return;
+    }
+
+    if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        listenHourlyPrayerButton.textContent =
+            "▶ Listen to This Prayer";
+        return;
+    }
+
+    const hourlyPrayerVoice =
+        new SpeechSynthesisUtterance(currentHourlyPrayer.prayer);
+
+    hourlyPrayerVoice.lang = 'en-GB';
+
+    const availableVoices =
+        window.speechSynthesis.getVoices();
+
+    const preferredVoice =
+        availableVoices.find(voice =>
+            /Sonia|Serena|Kate|Stephanie|Libby|Martha/i.test(voice.name)
+            && voice.lang.toLowerCase().startsWith('en-gb')
+        ) ||
+        availableVoices.find(voice =>
+            voice.lang.toLowerCase().startsWith('en-gb')
+        ) ||
+        availableVoices.find(voice =>
+            voice.lang.toLowerCase().startsWith('en')
+        );
+
+    if (preferredVoice) {
+        hourlyPrayerVoice.voice = preferredVoice;
+    }
+
+    hourlyPrayerVoice.rate = 0.74;
+    hourlyPrayerVoice.pitch = 1;
+
+    hourlyPrayerVoice.onstart = function() {
+        listenHourlyPrayerButton.textContent =
+            "■ Stop Prayer";
+    };
+
+    hourlyPrayerVoice.onend = function() {
+        listenHourlyPrayerButton.textContent =
+            "▶ Listen to This Prayer";
+    };
+
+    hourlyPrayerVoice.onerror = function() {
+        listenHourlyPrayerButton.textContent =
+            "▶ Listen to This Prayer";
+    };
+
+    window.speechSynthesis.speak(hourlyPrayerVoice);
+});
+    
 </script>
 
 <script>
