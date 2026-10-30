@@ -1662,36 +1662,36 @@ listenNeedPrayerButton.addEventListener('click', function() {
         return;
     }
 
-    const needPrayerVoice =
-        new SpeechSynthesisUtterance(message.prayer);
+const needPrayerVoice =
+    new SpeechSynthesisUtterance(message.prayer);
 
-    needPrayerVoice.lang = 'en-GB';
+needPrayerVoice.lang = 'en-GB';
 
-    const availableVoices =
-        window.speechSynthesis.getVoices();
+const availableVoices =
+    window.speechSynthesis.getVoices();
 
-    const preferredVoice =
-        availableVoices.find(voice =>
-            /Sonia|Serena|Kate|Stephanie|Libby|Martha/i.test(voice.name)
-            && voice.lang.toLowerCase().startsWith('en-gb')
-        ) ||
-        availableVoices.find(voice =>
-            voice.lang.toLowerCase().startsWith('en-gb')
-        ) ||
-        availableVoices.find(voice =>
-            voice.lang.toLowerCase().startsWith('en')
-        );
+const preferredVoice =
+    availableVoices.find(voice =>
+        /Sonia/i.test(voice.name) &&
+        voice.lang.toLowerCase().startsWith('en-gb')
+    ) ||
+    availableVoices.find(voice =>
+        voice.lang.toLowerCase().startsWith('en-gb')
+    ) ||
+    availableVoices.find(voice =>
+        voice.lang.toLowerCase().startsWith('en')
+    );
 
-    if (preferredVoice) {
-        needPrayerVoice.voice = preferredVoice;
-    }
+if (preferredVoice) {
+    needPrayerVoice.voice = preferredVoice;
+}
 
-    needPrayerVoice.rate = 0.74;
-    needPrayerVoice.pitch = 1;
+needPrayerVoice.rate = 0.9;
+needPrayerVoice.pitch = 0.8;
 
-    needPrayerVoice.onstart = function() {
-        listenNeedPrayerButton.textContent = "■ Stop Prayer";
-    };
+needPrayerVoice.onstart = function() {
+    listenNeedPrayerButton.textContent = "■ Stop Prayer";
+};
 
     needPrayerVoice.onend = function() {
         listenNeedPrayerButton.textContent = "▶ Listen to This Prayer";
@@ -1701,12 +1701,12 @@ listenNeedPrayerButton.addEventListener('click', function() {
         listenNeedPrayerButton.textContent = "▶ Listen to This Prayer";
     };
 
-    window.speechSynthesis.speak(needPrayerVoice);
+window.speechSynthesis.speak(needPrayerVoice);
 });
-        
-        needResponse.scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest'
+
+needResponse.scrollIntoView({
+    behavior: 'smooth',
+    block: 'nearest'
 });
     });
 });
