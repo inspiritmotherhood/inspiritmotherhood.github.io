@@ -1473,13 +1473,76 @@ needButtons.forEach(function(button) {
                 <h4>Let Us Pray</h4>
 
                 <p>${message.prayer}</p>
+
+                <button type="button" id="listen-need-prayer" class="listen-need-prayer">
+    ▶ Listen to This Prayer
+</button>
+
             </div>
         `;
 
+const listenNeedPrayerButton =
+    document.getElementById('listen-need-prayer');
+
+listenNeedPrayerButton.addEventListener('click', function() {
+
+    if (!('speechSynthesis' in window)) {
+        alert('Audio prayer is not supported by this browser.');
+        return;
+    }
+
+    if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        listenNeedPrayerButton.textContent = "▶ Listen to This Prayer";
+        return;
+    }
+
+    const needPrayerVoice =
+        new SpeechSynthesisUtterance(message.prayer);
+
+    needPrayerVoice.lang = 'en-GB';
+
+    const availableVoices =
+        window.speechSynthesis.getVoices();
+
+    const preferredVoice =
+        availableVoices.find(voice =>
+            /Sonia|Serena|Kate|Stephanie|Libby|Martha/i.test(voice.name)
+            && voice.lang.toLowerCase().startsWith('en-gb')
+        ) ||
+        availableVoices.find(voice =>
+            voice.lang.toLowerCase().startsWith('en-gb')
+        ) ||
+        availableVoices.find(voice =>
+            voice.lang.toLowerCase().startsWith('en')
+        );
+
+    if (preferredVoice) {
+        needPrayerVoice.voice = preferredVoice;
+    }
+
+    needPrayerVoice.rate = 0.74;
+    needPrayerVoice.pitch = 1;
+
+    needPrayerVoice.onstart = function() {
+        listenNeedPrayerButton.textContent = "■ Stop Prayer";
+    };
+
+    needPrayerVoice.onend = function() {
+        listenNeedPrayerButton.textContent = "▶ Listen to This Prayer";
+    };
+
+    needPrayerVoice.onerror = function() {
+        listenNeedPrayerButton.textContent = "▶ Listen to This Prayer";
+    };
+
+    window.speechSynthesis.speak(needPrayerVoice);
+});
+        
         needResponse.scrollIntoView({
             behavior: 'smooth',
             block: 'nearest'
-        });
+});
     });
 });
 
