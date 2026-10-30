@@ -609,6 +609,97 @@ footer {
         transform: translateY(0);
     }
 }
+
+/* ========================================
+   DAILY WITH GOD
+======================================== */
+
+.daily-with-god {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 50px 30px;
+    text-align: center;
+}
+
+.daily-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.daily-with-god h2 {
+    font-size: 2.2rem;
+    margin: 5px 0 10px;
+}
+
+#daily-date {
+    font-style: italic;
+    margin-bottom: 30px;
+}
+
+.daily-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.10);
+    text-align: left;
+}
+
+.daily-card h3 {
+    margin-top: 28px;
+    font-size: 1.25rem;
+}
+
+.daily-card h3:first-child {
+    margin-top: 0;
+}
+
+#daily-scripture {
+    font-weight: 700;
+    line-height: 1.8;
+    font-size: 1.08rem;
+}
+
+#daily-devotion,
+#daily-prayer {
+    line-height: 1.8;
+}
+
+#listen-prayer {
+    display: block;
+    margin: 30px auto 0;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 30px;
+    background: #6f4b8b;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+#listen-prayer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 700px) {
+    .daily-with-god {
+        margin: 35px 15px;
+        padding: 35px 18px;
+    }
+
+    .daily-with-god h2 {
+        font-size: 1.8rem;
+    }
+
+    .daily-card {
+        padding: 28px 20px;
+    }
+}
         
     </style>
 
@@ -661,6 +752,34 @@ footer {
 
 <div id="need-response" class="need-response" aria-live="polite"></div>
     
+</section>
+
+<!-- DAILY WITH GOD -->
+<section class="daily-with-god" id="daily">
+
+    <p class="daily-label">DAILY WITH GOD</p>
+
+    <h2>A Word for Today</h2>
+
+    <p id="daily-date"></p>
+
+    <div class="daily-card">
+
+        <h3>Today's Scripture</h3>
+        <p id="daily-scripture"></p>
+
+        <h3>Today's Devotion</h3>
+        <p id="daily-devotion"></p>
+
+        <h3>Today's Prayer</h3>
+        <p id="daily-prayer"></p>
+
+        <button type="button" id="listen-prayer">
+            ▶ Listen to Today's Prayer
+        </button>
+
+    </div>
+
 </section>
 
 <div class="about-box">
@@ -1363,6 +1482,78 @@ needButtons.forEach(function(button) {
         });
     });
 });
+
+</script>
+
+<script>
+const dailyDevotionals = [
+    {
+        scripture: '"This is the day which the LORD hath made; we will rejoice and be glad in it." — Psalm 118:24 (KJV)',
+        devotion: "Today is a gift from God. You may not know everything this day will bring, but you can choose to enter it with faith. Instead of carrying tomorrow's worries into today, ask God to help you recognize His grace in the moments directly in front of you.",
+        prayer: "Father, thank You for the gift of this day. Help me walk through it with gratitude, wisdom, and faith. Open my eyes to Your goodness and guide every step I take. In Jesus' name, Amen."
+    },
+
+    {
+        scripture: '"Trust in the LORD with all thine heart; and lean not unto thine own understanding." — Proverbs 3:5 (KJV)',
+        devotion: "There will be moments when you cannot understand what God is doing. Faith does not require you to have every answer. It invites you to place what you cannot understand into the hands of the One who sees what you cannot see.",
+        prayer: "Lord, help me trust You when I do not understand. Keep me from allowing fear to lead my decisions. Give me wisdom for today and teach me to depend upon You. In Jesus' name, Amen."
+    },
+
+    {
+        scripture: '"The LORD is my shepherd; I shall not want." — Psalm 23:1 (KJV)',
+        devotion: "A shepherd stays close, leads, protects, and provides. When life feels uncertain, remember who is leading you. You do not have to know the entire road ahead to follow God faithfully through today's portion of the journey.",
+        prayer: "Lord, be my Shepherd today. Lead me where I should go, provide what I truly need, and help me recognize Your direction. Give me a heart that follows You faithfully. In Jesus' name, Amen."
+    },
+
+    {
+        scripture: '"I can do all things through Christ which strengtheneth me." — Philippians 4:13 (KJV)',
+        devotion: "Your strength does not have to come only from yourself. When responsibilities feel heavy, bring your weakness to Christ. Ask Him for the strength required for the work, decisions, conversations, and challenges that belong to today.",
+        prayer: "Jesus, strengthen me for what You have placed before me today. Where I am weak, help me depend upon You. Give me courage, endurance, and wisdom to continue faithfully. In Jesus' name, Amen."
+    },
+
+    {
+        scripture: '"Be still, and know that I am God." — Psalm 46:10 (KJV)',
+        devotion: "Not every answer comes through doing more. Sometimes your soul needs stillness. Make room today to quiet the noise, pray, listen, and remember that God remains God even when circumstances feel unsettled.",
+        prayer: "Father, quiet the noise around me and within me. Teach me to be still in Your presence. Help me release what I cannot control and place my confidence in You. In Jesus' name, Amen."
+    },
+
+    {
+        scripture: '"For with God nothing shall be impossible." — Luke 1:37 (KJV)',
+        devotion: "What looks impossible from your perspective is not beyond God's power. That does not mean every circumstance will unfold exactly as you expect, but it means you can bring even the hardest situation before Him with faith and surrender.",
+        prayer: "Lord, I bring You the situations that feel impossible to me. Give me faith without presumption, hope without fear, and a heart surrendered to Your will. Lead me according to Your wisdom. In Jesus' name, Amen."
+    },
+
+    {
+        scripture: '"Draw nigh to God, and he will draw nigh to you." — James 4:8 (KJV)',
+        devotion: "God invites you into relationship with Him. Set aside even a few intentional moments today for Scripture, prayer, worship, and listening. A deeper walk with God grows through a life that continually turns toward Him.",
+        prayer: "Lord, draw my heart closer to You. Give me a desire for Your Word and teach me to recognize Your direction. Help me remove distractions and make room for Your presence in my daily life. In Jesus' name, Amen."
+    }
+];
+
+const today = new Date();
+
+const dayIndex = Math.floor(
+    Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) / 86400000
+) % dailyDevotionals.length;
+
+const todaysDevotional = dailyDevotionals[dayIndex];
+
+document.getElementById('daily-date').textContent =
+    today.toLocaleDateString(undefined, {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+
+document.getElementById('daily-scripture').textContent =
+    todaysDevotional.scripture;
+
+document.getElementById('daily-devotion').textContent =
+    todaysDevotional.devotion;
+
+document.getElementById('daily-prayer').textContent =
+    todaysDevotional.prayer;
 </script>
 
 </body>
