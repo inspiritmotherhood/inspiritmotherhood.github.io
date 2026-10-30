@@ -611,6 +611,123 @@ footer {
 }
 
 /* ========================================
+   IN SPIRIT MOTHERHOOD PRAYER ROOM
+   NONSTOP PRAYER
+======================================== */
+
+.prayer-room {
+    max-width: 950px;
+    margin: 60px auto;
+    padding: 55px 30px;
+    text-align: center;
+    background: linear-gradient(135deg, #f8f4ff, #ffffff);
+    border-radius: 28px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.10);
+}
+
+.prayer-room-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #6f4b8b;
+    margin-bottom: 10px;
+}
+
+.prayer-room h2 {
+    font-size: 2.3rem;
+    margin: 8px 0 15px;
+}
+
+.prayer-room-intro {
+    max-width: 700px;
+    margin: 0 auto 35px;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.hourly-prayer-card {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 22px;
+    border-top: 5px solid #6f4b8b;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
+    text-align: left;
+}
+
+.prayer-hour-label {
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #6f4b8b;
+}
+
+.hourly-prayer-card h3 {
+    text-align: center;
+    font-size: 1.6rem;
+    margin: 12px 0 25px;
+}
+
+.hourly-prayer-card h4 {
+    margin-top: 28px;
+    font-size: 1.2rem;
+}
+
+.hourly-scripture {
+    font-weight: 700;
+    font-style: italic;
+    line-height: 1.8;
+}
+
+#hourly-prayer-message,
+#hourly-prayer-text {
+    line-height: 1.8;
+}
+
+#listen-hourly-prayer {
+    display: block;
+    margin: 30px auto 0;
+    padding: 14px 25px;
+    border: none;
+    border-radius: 30px;
+    background: #6f4b8b;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+#listen-hourly-prayer:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.prayer-room-note {
+    margin-top: 22px;
+    font-size: 0.92rem;
+    font-style: italic;
+}
+
+@media (max-width: 700px) {
+    .prayer-room {
+        margin: 35px 15px;
+        padding: 40px 18px;
+    }
+
+    .prayer-room h2 {
+        font-size: 1.9rem;
+    }
+
+    .hourly-prayer-card {
+        padding: 30px 20px;
+    }
+}
+        
+/* ========================================
    DAILY WITH GOD
 ======================================== */
 
@@ -732,6 +849,7 @@ footer {
 
 <!-- WHAT DO YOU NEED TODAY? -->
 <section class="need-today" id="start-here">
+    
     <h2>What Do You Need Today?</h2>
 
     <p>
@@ -753,7 +871,54 @@ footer {
 <div id="need-response" class="need-response" aria-live="polite"></div>
     
 </section>
+<!-- NONSTOP PRAYER ROOM -->
+<section class="prayer-room" id="prayer-room">
 
+    <p class="prayer-room-label">
+        IN SPIRIT MOTHERHOOD PRAYER ROOM
+    </p>
+
+    <h2>Nonstop Prayer</h2>
+
+    <p class="prayer-room-intro">
+        There is a prayer waiting for you in every hour.
+        Pause for a moment, bring your heart before God,
+        and let His Word lead you into prayer.
+    </p>
+
+    <div class="hourly-prayer-card">
+
+        <p class="prayer-hour-label">PRAYER FOR THIS HOUR</p>
+
+        <h3 id="hourly-prayer-title">
+            A Prayer for This Hour
+        </h3>
+
+        <p id="hourly-prayer-scripture" class="hourly-scripture">
+            Scripture will appear here.
+        </p>
+
+        <p id="hourly-prayer-message">
+            Encouragement will appear here.
+        </p>
+
+        <h4>Let Us Pray</h4>
+
+        <p id="hourly-prayer-text">
+            Prayer will appear here.
+        </p>
+
+        <button type="button" id="listen-hourly-prayer">
+            ▶ Listen to This Prayer
+        </button>
+
+    </div>
+
+    <p class="prayer-room-note">
+        A new prayer appears every hour.
+    </p>
+
+</section>
 <!-- DAILY WITH GOD -->
 <section class="daily-with-god" id="daily">
 
@@ -1545,11 +1710,131 @@ listenNeedPrayerButton.addEventListener('click', function() {
 });
     });
 });
+/* ========================================
+   NONSTOP PRAYER ROOM
+   Hourly Prayer Library
+======================================== */
+
+const hourlyPrayers = {
+
+    0: {
+        title: "God's Presence in the Midnight Hour",
+        scripture: '"At midnight I will rise to give thanks unto thee because of thy righteous judgments." — Psalm 119:62 (KJV)',
+        message: "The night may feel quiet, lonely, or uncertain, but God is still present. Whether you are awake because of prayer, worry, work, or circumstances beyond your control, this hour can become a place of surrender. Bring what is on your heart before the Lord and remember that darkness does not hide you from Him.",
+        prayer: "Heavenly Father, in this midnight hour I turn my heart toward You. Thank You that Your presence is not limited by time or circumstance. Watch over every person who is awake tonight. Bring peace where there is fear, comfort where there is sorrow, and wisdom where there is uncertainty. Help us rest in the assurance that You are near. In Jesus' name, Amen."
+    },
+
+    1: {
+        title: "Prayer for Those Who Cannot Sleep",
+        scripture: '"I will both lay me down in peace, and sleep: for thou, LORD, only makest me dwell in safety." — Psalm 4:8 (KJV)',
+        message: "If your mind will not become quiet tonight, you do not have to carry every thought by yourself. Bring each concern before God. Release tomorrow into His hands and allow this moment to become an invitation to rest in His care.",
+        prayer: "Father, I bring You every thought that is keeping me awake. Quiet the worries that are running through my mind and help my body and heart find rest. Give peace to those who are anxious, grieving, afraid, or exhausted tonight. Remind us that tomorrow is already in Your hands. In Jesus' name, Amen."
+    },
+
+    2: {
+        title: "Prayer for Protection and Safety",
+        scripture: '"The LORD shall preserve thy going out and thy coming in from this time forth, and even for evermore." — Psalm 121:8 (KJV)',
+        message: "At this hour, many people are sleeping while others are traveling, working, caring for someone, or facing circumstances we may never see. We can lift them before God and ask for His protection, wisdom, and peace.",
+        prayer: "Lord, I pray for protection over homes, families, children, travelers, night workers, first responders, caregivers, and everyone facing danger or uncertainty. Give wisdom in difficult situations and guide people away from harm. Surround those who are afraid with Your peace and help us place our trust in You. In Jesus' name, Amen."
+    },
+
+    3: {
+        title: "Prayer for Healing",
+        scripture: '"Heal me, O LORD, and I shall be healed; save me, and I shall be saved: for thou art my praise." — Jeremiah 17:14 (KJV)',
+        message: "Illness can affect the body, mind, family, and spirit. In this hour, we remember those who are sick, hospitalized, recovering, waiting for answers, caring for loved ones, or living with pain. We bring these needs before God while also giving thanks for the people He uses to provide care.",
+        prayer: "Father, I lift before You those who need healing today. Strengthen those who are sick and comfort those who are hurting. Give wisdom to doctors, nurses, caregivers, counselors, and everyone involved in their care. Provide endurance during treatment and peace during uncertainty. Help each person know that they are seen and deeply cared for. In Jesus' name, Amen."
+    },
+
+    4: {
+        title: "Prayer for Grieving and Broken Hearts",
+        scripture: '"The LORD is nigh unto them that are of a broken heart." — Psalm 34:18 (KJV)',
+        message: "Some grief is visible, while other grief is carried silently. Someone may be mourning a person, a relationship, a dream, a home, or a season of life that has ended. God invites the brokenhearted to come near without pretending that everything is okay.",
+        prayer: "Lord, draw near to every grieving heart. Comfort those who are mourning and strengthen those whose pain feels too heavy to explain. Give them safe people who will listen with patience and compassion. Carry them through the difficult moments and give them grace for one day at a time. In Jesus' name, Amen."
+    },
+
+    5: {
+        title: "New Mercies for a New Day",
+        scripture: '"They are new every morning: great is thy faithfulness." — Lamentations 3:23 (KJV)',
+        message: "A new morning reminds us that yesterday does not have to control today. Whatever happened before this moment, you can bring it before God. Receive His mercy, learn from what has passed, and ask Him for wisdom to walk faithfully into the new day.",
+        prayer: "Father, thank You for new mercy this morning. I give You yesterday's disappointments, mistakes, victories, and unanswered questions. Clean my heart from what should not follow me into today. Give me wisdom for my decisions, compassion toward others, and courage for whatever lies ahead. Let my words and actions honor You today. In Jesus' name, Amen."
+    },
+
+    6: {
+        title: "Morning Surrender",
+        scripture: '"Cause me to hear thy lovingkindness in the morning; for in thee do I trust: cause me to know the way wherein I should walk; for I lift up my soul unto thee." — Psalm 143:8 (KJV)',
+        message: "Before the responsibilities of the day begin to pull your attention in many directions, take this moment to surrender the day to God. You do not have to know everything that will happen. Ask Him to guide your decisions, your words, your attitude, and every step you take.",
+        prayer: "Heavenly Father, thank You for bringing me into a new morning. Before I begin this day, I surrender my plans, responsibilities, worries, and expectations to You. Direct my steps and give me wisdom in every decision. Guard my words and help me treat others with grace. Let my life honor You in everything I do today. In Jesus' name, Amen."
+    },
+
+    7: {
+        title: "Prayer for Children and Families",
+        scripture: '"And all thy children shall be taught of the LORD; and great shall be the peace of thy children." — Isaiah 54:13 (KJV)',
+        message: "Families carry many joys and many responsibilities. This hour, we lift children, parents, grandparents, guardians, caregivers, and families before God. We pray for wisdom in our homes, protection for children, healing where relationships are strained, and peace where families are carrying heavy burdens.",
+        prayer: "Father, I lift children and families before You today. Protect our children and guide them as they learn and grow. Give parents, guardians, grandparents, and caregivers wisdom, patience, and strength. Bring healing where families are hurting and reconciliation where relationships have been broken. Help our homes become places of love, truth, grace, and peace. In Jesus' name, Amen."
+    },
+
+    8: {
+        title: "Prayer for Work, School, and Daily Responsibilities",
+        scripture: '"And whatsoever ye do, do it heartily, as to the Lord, and not unto men." — Colossians 3:23 (KJV)',
+        message: "The ordinary responsibilities of life can also become places where faith is lived. Whether you are going to work, attending school, caring for your family, serving others, searching for employment, or managing responsibilities at home, ask God to give you wisdom and integrity for the work before you.",
+        prayer: "Lord, I place today's responsibilities into Your hands. Give me focus for the work I need to complete, wisdom for the decisions I must make, and patience when things become difficult. Help students learn, workers serve with integrity, caregivers receive strength, and those seeking employment find encouragement and direction. May the work of our hands honor You. In Jesus' name, Amen."
+    },
+
+    9: {
+        title: "Prayer for Wisdom and Direction",
+        scripture: '"If any of you lack wisdom, let him ask of God, that giveth to all men liberally, and upbraideth not; and it shall be given him." — James 1:5 (KJV)',
+        message: "Some decisions are simple, while others can change the direction of our lives. When you are uncertain about what to do next, you can bring that uncertainty before God. Seek His wisdom through prayer, Scripture, wise counsel, and patient discernment rather than allowing fear to make the decision for you.",
+        prayer: "Father, I need Your wisdom and direction. Help me recognize what is true and make decisions that honor You. Protect me from choices driven only by fear, pressure, pride, or impatience. Give me discernment, surround me with wise counsel, and teach me to wait when I need to wait and move when it is time to move. In Jesus' name, Amen."
+    },
+
+    10: {
+        title: "Prayer for New Believers",
+        scripture: '"Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new." — 2 Corinthians 5:17 (KJV)',
+        message: "If you have recently placed your faith in Jesus Christ, you are beginning a journey of growing in relationship with Him. You do not have to understand everything at once. Begin with prayer, read God's Word, learn about Jesus, seek a faithful Christian community, and allow God to shape your life one step at a time.",
+        prayer: "Lord Jesus, thank You for every person who has placed their faith in You. Help each new believer grow in understanding of Your Word and become rooted in truth. Give them a desire to pray, wisdom as they read Scripture, and faithful people who will encourage them in their walk with You. When they have questions, give them patience to keep learning. Strengthen their faith and help them grow in the grace and knowledge of Jesus Christ. Amen."
+    },
+
+ 11: {
+        title: "Prayer for Those Who Feel Alone",
+        scripture: '"I will never leave thee, nor forsake thee." — Hebrews 13:5 (KJV)',
+        message: "Loneliness can exist even when other people are nearby. If you feel unseen, forgotten, or disconnected today, bring those feelings honestly before God. Ask Him also to help you reach toward trustworthy people and healthy community rather than carrying everything alone.",
+        prayer: "Father, I pray for everyone who feels alone today. Remind them of Your presence and comfort those who feel forgotten or unseen. Bring trustworthy and compassionate people into their lives. Give them courage to reach toward healthy community and help us notice the people around us who may also need encouragement. Teach us to become a source of kindness and companionship to one another. In Jesus' name, Amen."
+    }
+
+};
 
 </script>
 
 <script>
+
+/* ========================================
+   DISPLAY THE PRAYER FOR THE CURRENT HOUR
+======================================== */
+
+const currentPrayerHour = new Date().getHours();
+const currentHourlyPrayer = hourlyPrayers[currentPrayerHour];
+
+if (currentHourlyPrayer) {
+
+    document.getElementById('hourly-prayer-title').textContent =
+        currentHourlyPrayer.title;
+
+    document.getElementById('hourly-prayer-scripture').textContent =
+        currentHourlyPrayer.scripture;
+
+    document.getElementById('hourly-prayer-message').textContent =
+        currentHourlyPrayer.message;
+
+    document.getElementById('hourly-prayer-text').textContent =
+        currentHourlyPrayer.prayer;
+}
+
+</script>
+
+<script>
+    
 const dailyDevotionals = [
+
     {
         scripture: '"This is the day which the LORD hath made; we will rejoice and be glad in it." — Psalm 118:24 (KJV)',
         devotion: "Today is a gift from God. You may not know everything this day will bring, but you can choose to enter it with faith. Instead of carrying tomorrow's worries into today, ask God to help you recognize His grace in the moments directly in front of you.",
@@ -1581,18 +1866,19 @@ const dailyDevotionals = [
     },
 
     {
-        scripture: '"For with God nothing shall be impossible." — Luke 1:37 (KJV)',
-        devotion: "What looks impossible from your perspective is not beyond God's power. That does not mean every circumstance will unfold exactly as you expect, but it means you can bring even the hardest situation before Him with faith and surrender.",
-        prayer: "Lord, I bring You the situations that feel impossible to me. Give me faith without presumption, hope without fear, and a heart surrendered to Your will. Lead me according to Your wisdom. In Jesus' name, Amen."
-    },
+    scripture: '"For with God nothing shall be impossible." — Luke 1:37 (KJV)',
+    devotion: "What looks impossible from your perspective is not beyond God's power. That does not mean every circumstance will unfold exactly as you expect, but it means you can bring even the hardest situation before Him with faith and surrender.",
+    prayer: "Lord, I bring You the situations that feel impossible to me. Give me faith without presumption, hope without fear, and a heart surrendered to Your will. Lead me according to Your wisdom. In Jesus' name, Amen."
+},
 
-    {
-        scripture: '"Draw nigh to God, and he will draw nigh to you." — James 4:8 (KJV)',
-        devotion: "God invites you into relationship with Him. Set aside even a few intentional moments today for Scripture, prayer, worship, and listening. A deeper walk with God grows through a life that continually turns toward Him.",
-        prayer: "Lord, draw my heart closer to You. Give me a desire for Your Word and teach me to recognize Your direction. Help me remove distractions and make room for Your presence in my daily life. In Jesus' name, Amen."
-    }
+{
+    scripture: '"Draw nigh to God, and he will draw nigh to you." — James 4:8 (KJV)',
+    devotion: "God invites you into relationship with Him. Set aside even a few intentional moments today for Scripture, prayer, worship, and listening. A deeper walk with God grows through a life that continually turns toward Him.",
+    prayer: "Lord, draw my heart closer to You. Give me a desire for Your Word and teach me to recognize Your direction. Help me remove distractions and make room for Your presence in my daily life. In Jesus' name, Amen."
+}
+    
 ];
-
+    
 const today = new Date();
 
 const dayIndex = Math.floor(
