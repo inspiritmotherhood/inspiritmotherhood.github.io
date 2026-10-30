@@ -1570,11 +1570,26 @@ listenPrayerButton.addEventListener('click', function() {
         return;
     }
 
-    const prayerVoice = new SpeechSynthesisUtterance(
-        todaysDevotional.prayer
+   const prayerVoice = new SpeechSynthesisUtterance(
+    todaysDevotional.prayer
+);
+
+const availableVoices = window.speechSynthesis.getVoices();
+
+const preferredVoice =
+    availableVoices.find(voice =>
+        /Samantha|Jenny|Aria|Ava|Zira|Susan|Victoria|Karen|Moira|Tessa/i.test(voice.name)
+        && voice.lang.toLowerCase().startsWith('en')
+    ) ||
+    availableVoices.find(voice =>
+        voice.lang.toLowerCase().startsWith('en')
     );
 
-    prayerVoice.rate = 0.78;
+if (preferredVoice) {
+    prayerVoice.voice = preferredVoice;
+}
+
+    prayerVoice.rate = 0.74;
     prayerVoice.pitch = 1;
 
     prayerVoice.onstart = function() {
