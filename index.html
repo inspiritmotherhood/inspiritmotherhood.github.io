@@ -649,14 +649,14 @@ footer {
     </p>
 
 <div class="need-options">
-    <button>I Need Prayer</button>
+    <button type="button" data-need="prayer">I Need Prayer</button>
     <button type="button" data-need="peace">I Need Peace</button>
-    <button>My Family Needs Healing</button>
-    <button>I Am Grieving</button>
-    <button>I Feel Alone</button>
-    <button>I Need Strength</button>
-    <button>I Need Encouragement</button>
-    <button>I Want to Grow Closer to God</button>
+    <button type="button" data-need="family">My Family Needs Healing</button>
+    <button type="button" data-need="grief">I Am Grieving</button>
+    <button type="button" data-need="alone">I Feel Alone</button>
+    <button type="button" data-need="strength">I Need Strength</button>
+    <button type="button" data-need="encouragement">I Need Encouragement</button>
+    <button type="button" data-need="closer">I Want to Grow Closer to God</button>
 </div>
 
 <div id="need-response" class="need-response" aria-live="polite"></div>
@@ -1273,38 +1273,87 @@ others according to the example of Jesus Christ.
 </footer>
 
 <script>
-    const peaceButton = document.querySelector('[data-need="peace"]');
-    const needResponse = document.getElementById('need-response');
+const needMessages = {
+    prayer: {
+        title: "When You Need Prayer",
+        scripture: '"Call unto me, and I will answer thee, and shew thee great and mighty things, which thou knowest not." — Jeremiah 33:3 (KJV)',
+        encouragement: "God invites you to come to Him in prayer. You do not need perfect words. Bring Him your fears, questions, hopes, and needs. He already knows your heart, and you can come before Him honestly.",
+        prayer: "Heavenly Father, I come before You today with everything that is on my heart. Help me trust You even when I cannot see the answer. Give me wisdom, peace, and strength for what is ahead. Let Your will be done in my life, and draw me closer to You. In Jesus' name, Amen."
+    },
 
-    peaceButton.addEventListener('click', function () {
+    peace: {
+        title: "Peace for Your Heart",
+        scripture: '"Peace I leave with you, my peace I give unto you: not as the world giveth, give I unto you." — John 14:27 (KJV)',
+        encouragement: "Whatever is weighing on your heart today, bring it before Jesus. His peace is not dependent on everything around you becoming perfect. Christ meets us in the middle of uncertainty and reminds us that we are not walking alone.",
+        prayer: "Lord Jesus, quiet my heart and help me rest in Your presence. Where there is fear, give me faith. Where there is confusion, give me wisdom. Where there is heaviness, surround me with Your peace. Help me trust You with what I cannot control and remember that You are with me. In Jesus' name, Amen."
+    },
+
+    family: {
+        title: "When Your Family Needs Healing",
+        scripture: '"He healeth the broken in heart, and bindeth up their wounds." — Psalm 147:3 (KJV)',
+        encouragement: "Family wounds can be deeply painful, especially when love, trust, or communication has been damaged. Bring each person and each situation before God. Healing may take time, but you can ask Him for wisdom, forgiveness, healthy boundaries, reconciliation where possible, and grace for each step.",
+        prayer: "Father, I place my family into Your hands. Heal the places that have been wounded. Give us wisdom in our words, humility in our hearts, and grace toward one another. Restore what can be restored and guide us in truth, love, and peace. In Jesus' name, Amen."
+    },
+
+    grief: {
+        title: "Comfort When You Are Grieving",
+        scripture: '"The LORD is nigh unto them that are of a broken heart." — Psalm 34:18 (KJV)',
+        encouragement: "Grief does not have to be hidden from God. You can bring Him the tears, memories, questions, and silence. Give yourself permission to grieve, and remember that a broken heart is not beyond His compassion.",
+        prayer: "Lord, my heart is hurting. Meet me in this place of grief and carry me through the moments that feel too heavy. Comfort me, strengthen me, and surround me with people who will walk beside me with love and patience. In Jesus' name, Amen."
+    },
+
+    alone: {
+        title: "When You Feel Alone",
+        scripture: '"I will never leave thee, nor forsake thee." — Hebrews 13:5 (KJV)',
+        encouragement: "Loneliness can make a difficult season feel even heavier. Yet your feelings of loneliness do not mean you are forgotten. Bring that emptiness to God, and also allow trusted people to walk beside you. Sometimes His care reaches us through the community He places around us.",
+        prayer: "Father, when I feel alone, remind me of Your presence. Help me reach toward healthy community instead of withdrawing into isolation. Bring trustworthy people into my life and help me recognize Your care in the people and opportunities around me. In Jesus' name, Amen."
+    },
+
+    strength: {
+        title: "Strength for Today",
+        scripture: '"But they that wait upon the LORD shall renew their strength." — Isaiah 40:31 (KJV)',
+        encouragement: "You do not have to carry every burden through your own strength. When you are tired, slow down and bring your weakness before God. Ask Him for enough strength for the step in front of you today.",
+        prayer: "Lord, I am tired and I need Your strength. Help me not to give up. Give me wisdom to know when to move forward and when to rest. Renew my heart, strengthen my faith, and help me take today's next step with You. In Jesus' name, Amen."
+    },
+
+    encouragement: {
+        title: "A Word of Encouragement",
+        scripture: '"Fear thou not; for I am with thee: be not dismayed; for I am thy God." — Isaiah 41:10 (KJV)',
+        encouragement: "The chapter you are living today is not the whole story. Keep walking faithfully through the step that is before you. When fear tells you to stop, return to God's Word and remember where your hope is anchored.",
+        prayer: "Father, encourage my heart today. When I become discouraged, remind me of Your presence and Your truth. Give me courage for what is ahead and help me walk faithfully through this season. In Jesus' name, Amen."
+    },
+
+    closer: {
+        title: "When You Want to Grow Closer to God",
+        scripture: '"Draw nigh to God, and he will draw nigh to you." — James 4:8 (KJV)',
+        encouragement: "Growing closer to God is not about performing perfectly. Make room for Him through prayer, Scripture, worship, obedience, and quiet time in His presence. Begin where you are and allow your relationship with Him to deepen day by day.",
+        prayer: "Lord, I want to know You more deeply. Give me hunger for Your Word and a heart that listens to Your Spirit. Remove the distractions that pull me away from You. Teach me to walk with You faithfully and to become more like Christ. In Jesus' name, Amen."
+    }
+};
+
+const needResponse = document.getElementById('need-response');
+const needButtons = document.querySelectorAll('.need-options button');
+
+needButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+        const selectedNeed = button.dataset.need;
+        const message = needMessages[selectedNeed];
+
+        if (!message) return;
+
         needResponse.innerHTML = `
             <div class="response-card">
-                <h3>Peace for Your Heart</h3>
+                <h3>${message.title}</h3>
 
-                <p>
-                    <strong>
-                        "Peace I leave with you, my peace I give unto you:
-                        not as the world giveth, give I unto you."
-                        — John 14:27 (KJV)
-                    </strong>
+                <p class="scripture">
+                    <strong>${message.scripture}</strong>
                 </p>
 
-                <p>
-                    Whatever is weighing on your heart today, bring it before Jesus.
-                    His peace is not dependent on everything around you becoming perfect.
-                    Christ meets us in the middle of uncertainty and reminds us that
-                    we are not walking alone.
-                </p>
+                <p>${message.encouragement}</p>
 
                 <h4>Let Us Pray</h4>
 
-                <p>
-                    Lord Jesus, quiet my heart and help me rest in Your presence.
-                    Where there is fear, give me faith. Where there is confusion,
-                    give me wisdom. Where there is heaviness, surround me with Your
-                    peace. Help me trust You with what I cannot control and remember
-                    that You are with me. In Jesus' name, Amen.
-                </p>
+                <p>${message.prayer}</p>
             </div>
         `;
 
@@ -1313,6 +1362,7 @@ others according to the example of Jesus Christ.
             block: 'nearest'
         });
     });
+});
 </script>
 
 </body>
