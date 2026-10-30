@@ -1574,12 +1574,17 @@ listenPrayerButton.addEventListener('click', function() {
     todaysDevotional.prayer
 );
 
+prayerVoice.lang = 'en-GB';
+
 const availableVoices = window.speechSynthesis.getVoices();
 
 const preferredVoice =
     availableVoices.find(voice =>
-        /Samantha|Jenny|Aria|Ava|Zira|Susan|Victoria|Karen|Moira|Tessa/i.test(voice.name)
-        && voice.lang.toLowerCase().startsWith('en')
+        /Sonia|Serena|Kate|Stephanie|Libby|Martha/i.test(voice.name)
+        && voice.lang.toLowerCase().startsWith('en-gb')
+    ) ||
+    availableVoices.find(voice =>
+        voice.lang.toLowerCase().startsWith('en-gb')
     ) ||
     availableVoices.find(voice =>
         voice.lang.toLowerCase().startsWith('en')
@@ -1589,8 +1594,8 @@ if (preferredVoice) {
     prayerVoice.voice = preferredVoice;
 }
 
-    prayerVoice.rate = 0.74;
-    prayerVoice.pitch = 1;
+prayerVoice.rate = 0.74;
+prayerVoice.pitch = 1;
 
     prayerVoice.onstart = function() {
         listenPrayerButton.textContent = "■ Stop Prayer";
