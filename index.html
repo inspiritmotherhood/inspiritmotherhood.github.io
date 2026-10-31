@@ -2027,45 +2027,52 @@ const dailyDevotionals = [
     {
         scripture: '"This is the day which the LORD hath made; we will rejoice and be glad in it." — Psalm 118:24 (KJV)',
         devotion: "Today is a gift from God. You may not know everything this day will bring, but you can choose to enter it with faith. Instead of carrying tomorrow's worries into today, ask God to help you recognize His grace in the moments directly in front of you.",
-        prayer: "Father, thank You for the gift of this day. Help me walk through it with gratitude, wisdom, and faith. Open my eyes to Your goodness and guide every step I take. In Jesus' name, Amen."
+        prayer: "Father, thank You for the gift of this day. Help me walk through it with gratitude, wisdom, and faith. Open my eyes to Your goodness and guide every step I take. In Jesus' name, Amen.",
+        background: 'psalm-118-24 (1).png'
     },
 
-    {
-        scripture: '"Trust in the LORD with all thine heart; and lean not unto thine own understanding." — Proverbs 3:5 (KJV)',
-        devotion: "There will be moments when you cannot understand what God is doing. Faith does not require you to have every answer. It invites you to place what you cannot understand into the hands of the One who sees what you cannot see.",
-        prayer: "Lord, help me trust You when I do not understand. Keep me from allowing fear to lead my decisions. Give me wisdom for today and teach me to depend upon You. In Jesus' name, Amen."
-    },
+   {
+    scripture: '"Trust in the LORD with all thine heart; and lean not unto thine own understanding." — Proverbs 3:5 (KJV)',
+    devotion: "There will be moments when you cannot understand what God is doing. Faith does not require you to have every answer. It invites you to place what you cannot understand into the hands of the One who sees what you cannot see.",
+    prayer: "Lord, help me trust You when I do not understand. Keep me from allowing fear to lead my decisions. Give me wisdom for today and teach me to depend upon You. In Jesus' name, Amen.",
+    background: 'proverbs-3-5 (1).png'
+},
 
-    {
-        scripture: '"The LORD is my shepherd; I shall not want." — Psalm 23:1 (KJV)',
-        devotion: "A shepherd stays close, leads, protects, and provides. When life feels uncertain, remember who is leading you. You do not have to know the entire road ahead to follow God faithfully through today's portion of the journey.",
-        prayer: "Lord, be my Shepherd today. Lead me where I should go, provide what I truly need, and help me recognize Your direction. Give me a heart that follows You faithfully. In Jesus' name, Amen."
-    },
+{
+    scripture: '"The LORD is my shepherd; I shall not want." — Psalm 23:1 (KJV)',
+    devotion: "A shepherd stays close, leads, protects, and provides. When life feels uncertain, remember who is leading you. You do not have to know the entire road ahead to follow God faithfully through today's portion of the journey.",
+    prayer: "Lord, be my Shepherd today. Lead me where I should go, provide what I truly need, and help me recognize Your direction. Give me a heart that follows You faithfully. In Jesus' name, Amen.",
+    background: 'psalm-23-1 (1).png'
+},
 
-    {
-        scripture: '"I can do all things through Christ which strengtheneth me." — Philippians 4:13 (KJV)',
-        devotion: "Your strength does not have to come only from yourself. When responsibilities feel heavy, bring your weakness to Christ. Ask Him for the strength required for the work, decisions, conversations, and challenges that belong to today.",
-        prayer: "Jesus, strengthen me for what You have placed before me today. Where I am weak, help me depend upon You. Give me courage, endurance, and wisdom to continue faithfully. In Jesus' name, Amen."
-    },
+{
+    scripture: '"I can do all things through Christ which strengtheneth me." — Philippians 4:13 (KJV)',
+    devotion: "Your strength does not have to come only from yourself. When responsibilities feel heavy, bring your weakness to Christ. Ask Him for the strength required for the work, decisions, conversations, and challenges that belong to today.",
+    prayer: "Jesus, strengthen me for what You have placed before me today. Where I am weak, help me depend upon You. Give me courage, endurance, and wisdom to continue faithfully. In Jesus' name, Amen.",
+    background: 'philippians-4-13 (1).png'
+},
 
-    {
-        scripture: '"Be still, and know that I am God." — Psalm 46:10 (KJV)',
-        devotion: "Not every answer comes through doing more. Sometimes your soul needs stillness. Make room today to quiet the noise, pray, listen, and remember that God remains God even when circumstances feel unsettled.",
-        prayer: "Father, quiet the noise around me and within me. Teach me to be still in Your presence. Help me release what I cannot control and place my confidence in You. In Jesus' name, Amen."
-    },
+{
+    scripture: '"Be still, and know that I am God." — Psalm 46:10 (KJV)',
+    devotion: "Not every answer comes through doing more. Sometimes your soul needs stillness. Make room today to quiet the noise, pray, listen, and remember that God remains God even when circumstances feel unsettled.",
+    prayer: "Father, quiet the noise around me and within me. Teach me to be still in Your presence. Help me release what I cannot control and place my confidence in You. In Jesus' name, Amen.",
+    background: 'psalm-46-10 (1).png'
+},
 
-    {
+{
     scripture: '"For with God nothing shall be impossible." — Luke 1:37 (KJV)',
     devotion: "What looks impossible from your perspective is not beyond God's power. That does not mean every circumstance will unfold exactly as you expect, but it means you can bring even the hardest situation before Him with faith and surrender.",
-    prayer: "Lord, I bring You the situations that feel impossible to me. Give me faith without presumption, hope without fear, and a heart surrendered to Your will. Lead me according to Your wisdom. In Jesus' name, Amen."
+    prayer: "Lord, I bring You the situations that feel impossible to me. Give me faith without presumption, hope without fear, and a heart surrendered to Your will. Lead me according to Your wisdom. In Jesus' name, Amen.",
+    background: 'luke-1-37 (1).png'
 },
 
 {
     scripture: '"Draw nigh to God, and he will draw nigh to you." — James 4:8 (KJV)',
     devotion: "God invites you into relationship with Him. Set aside even a few intentional moments today for Scripture, prayer, worship, and listening. A deeper walk with God grows through a life that continually turns toward Him.",
-    prayer: "Lord, draw my heart closer to You. Give me a desire for Your Word and teach me to recognize Your direction. Help me remove distractions and make room for Your presence in my daily life. In Jesus' name, Amen."
+    prayer: "Lord, draw my heart closer to You. Give me a desire for Your Word and teach me to recognize Your direction. Help me remove distractions and make room for Your presence in my daily life. In Jesus' name, Amen.",
+    background: 'james-4-8 (1).png'
 }
-
+    
 ];
 
 const today = new Date();
@@ -2075,6 +2082,15 @@ const dayIndex = Math.floor(
 ) % dailyDevotionals.length;
 
 const todaysDevotional = dailyDevotionals[dayIndex];
+
+const dailySection = document.querySelector('.daily-with-god');
+
+dailySection.style.backgroundImage =
+    `linear-gradient(rgba(255,255,255,0.72), rgba(255,255,255,0.72)), url("${todaysDevotional.background}")`;
+
+dailySection.style.backgroundSize = 'cover';
+dailySection.style.backgroundPosition = 'center';
+dailySection.style.backgroundRepeat = 'no-repeat';
 
 document.getElementById('daily-date').textContent =
     today.toLocaleDateString(undefined, {
