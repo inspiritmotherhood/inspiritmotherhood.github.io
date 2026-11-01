@@ -1,4 +1,4 @@
-F<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -1686,11 +1686,11 @@ listenNeedPrayerButton.addEventListener('click', function() {
         return;
     }
 
-    if (window.speechSynthesis.speaking) {
-        window.speechSynthesis.cancel();
-        listenNeedPrayerButton.textContent = "▶ Listen to This Prayer";
-        return;
-    }
+if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    listenNeedPrayerButton.textContent = "▶ Listen to This Prayer";
+    return;
+}
 
 const needPrayerVoice =
     new SpeechSynthesisUtterance(message.prayer);
@@ -2111,6 +2111,10 @@ document.getElementById('daily-prayer').textContent =
 
 const listenPrayerButton = document.getElementById('listen-prayer');
 
+const amazingGraceMusic = new Audio('music_for_videos-amazing-grace-146071.mp3');
+amazingGraceMusic.volume = 0.12;
+amazingGraceMusic.loop = true;
+    
 listenPrayerButton.addEventListener('click', function() {
 
     if (!('speechSynthesis' in window)) {
@@ -2118,11 +2122,13 @@ listenPrayerButton.addEventListener('click', function() {
         return;
     }
 
-    if (window.speechSynthesis.speaking) {
-        window.speechSynthesis.cancel();
-        listenPrayerButton.textContent = "▶ Listen to Today's Prayer";
-        return;
-    }
+  if (window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    amazingGraceMusic.pause();
+    amazingGraceMusic.currentTime = 0;
+    listenPrayerButton.textContent = "▶ Listen to Today's Prayer";
+    return;
+}
 
    const prayerVoice = new SpeechSynthesisUtterance(
     todaysDevotional.prayer
@@ -2153,15 +2159,21 @@ prayerVoice.pitch = 1;
 
     prayerVoice.onstart = function() {
         listenPrayerButton.textContent = "■ Stop Prayer";
-    };
+        amazingGraceMusic.currentTime = 0;
+        amazingGraceMusic.play();
+};
 
     prayerVoice.onend = function() {
         listenPrayerButton.textContent = "▶ Listen to Today's Prayer";
-    };
+        amazingGraceMusic.pause();
+        amazingGraceMusic.currentTime = 0;
+};
 
-    prayerVoice.onerror = function() {
-        listenPrayerButton.textContent = "▶ Listen to Today's Prayer";
-    };
+   prayerVoice.onerror = function() {
+    listenPrayerButton.textContent = "▶ Listen to Today's Prayer";
+    amazingGraceMusic.pause();
+    amazingGraceMusic.currentTime = 0;
+};
 
     window.speechSynthesis.speak(prayerVoice);
 });
