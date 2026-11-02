@@ -2233,6 +2233,8 @@ const bibleWordOverlay = document.getElementById('bible-word-overlay');
 receiveWordButton.addEventListener('click', function () {
     bibleWordOverlay.textContent = todaysDevotional.scripture;
     bibleWordOverlay.classList.add('show');
+    amazingGraceMusic.currentTime = 0;
+    amazingGraceMusic.play();
 });
 
 const listenPrayerButton = document.getElementById('listen-prayer');
@@ -2250,8 +2252,6 @@ listenPrayerButton.addEventListener('click', function() {
 
   if (window.speechSynthesis.speaking) {
     window.speechSynthesis.cancel();
-    amazingGraceMusic.pause();
-    amazingGraceMusic.currentTime = 0;
     listenPrayerButton.textContent = "▶ Listen to Today's Prayer";
     return;
 }
@@ -2285,20 +2285,14 @@ prayerVoice.pitch = 1;
 
     prayerVoice.onstart = function() {
         listenPrayerButton.textContent = "■ Stop Prayer";
-        amazingGraceMusic.currentTime = 0;
-        amazingGraceMusic.play();
 };
 
     prayerVoice.onend = function() {
         listenPrayerButton.textContent = "▶ Listen to Today's Prayer";
-        amazingGraceMusic.pause();
-        amazingGraceMusic.currentTime = 0;
 };
 
    prayerVoice.onerror = function() {
     listenPrayerButton.textContent = "▶ Listen to Today's Prayer";
-    amazingGraceMusic.pause();
-    amazingGraceMusic.currentTime = 0;
 };
 
     window.speechSynthesis.speak(prayerVoice);
