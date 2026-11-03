@@ -430,7 +430,7 @@ margin: 30px auto;
         display: block;
     }
 
-.about-content img.profile-photo {
+.profile-photo {
     width: 150px;
     height: auto;
     border: 6px solid purple;
@@ -455,8 +455,14 @@ margin: 30px auto;
 }
 
 #profile-lightbox img {
-    max-width: 90%;
-    max-height: 90vh;
+    position: static;
+    width: 300px;
+    max-width: 70vw;
+    max-height: 70vh;
+    height: auto;
+    margin: 0;
+    display: block;
+    object-fit: contain;
     border-radius: 20px;
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.45);
 }
