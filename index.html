@@ -1336,6 +1336,14 @@ footer {
 .daily-with-god #bible-word-overlay { z-index:11; top:58%; width:60%; box-sizing:border-box; font-size:clamp(12px,2vw,24px); }
 @media(max-width:600px) { .daily-with-god .sunset-live-date { border-width:1px; } .daily-with-god #bible-word-overlay { padding:7px; } }
 
+
+/* The song labels are baked into the poster, so show a real stop indicator over them. */
+.daily-with-god .sunset-stop-indicator { position:absolute; z-index:13; display:none; align-items:center; justify-content:center; pointer-events:none; background:#751638; color:#fff8e9; border:1px solid #f1c76c; border-radius:30px; box-shadow:0 2px 8px rgba(49,13,28,.35); font-family:Georgia,serif; font-weight:bold; font-size:clamp(8px,1.5vw,17px); }
+.daily-with-god .sunset-stop-indicator.is-playing { display:flex; }
+.daily-with-god .sunset-stop-friend { left:23%; top:90.6%; width:20%; height:4.3%; }
+.daily-with-god .sunset-stop-jesus { left:65%; top:90.6%; width:20%; height:4.3%; }
+.daily-with-god .sunset-stop-grace { left:39%; top:33.5%; width:22%; height:4.5%; }
+
 </style>
 
 </head>
@@ -1451,6 +1459,9 @@ footer {
     <button type="button" id="receive-word" class="sunset-hit sunset-receive" aria-label="Receive today's Word">Receive Today's Word</button>
     <button type="button" id="friend-hymn-button" class="sunset-hit sunset-friend" aria-label="Play or stop What a Friend We Have in Jesus">Touch & Listen</button>
     <button type="button" id="jesus-loves-me-button" class="sunset-hit sunset-jesus" aria-label="Play or stop Jesus Loves Me">Touch & Listen</button>
+    <span id="friend-stop-indicator" class="sunset-stop-indicator sunset-stop-friend" aria-hidden="true">■ Stop Hymn</span>
+    <span id="jesus-stop-indicator" class="sunset-stop-indicator sunset-stop-jesus" aria-hidden="true">■ Stop Hymn</span>
+    <span id="grace-stop-indicator" class="sunset-stop-indicator sunset-stop-grace" aria-hidden="true">■ Stop Music</span>
     <div class="cloud-breath"></div>
     <div class="water-shimmer"></div>
     <div class="bible-sun-sparkles" aria-hidden="true"></div>
@@ -2733,6 +2744,28 @@ jesusLovesMeMusic.volume = 0.12;
 jesusLovesMeMusic.loop = true;
 
 const jesusLovesMeButton = document.getElementById('jesus-loves-me-button');
+
+// Keep visible stop controls synchronized with audio playback.
+function syncSunsetAudioIndicators() {
+    const tracks = [
+        [friendJesusMusic, friendHymnButton, 'friend-stop-indicator', 'What a Friend We Have in Jesus'],
+        [jesusLovesMeMusic, jesusLovesMeButton, 'jesus-stop-indicator', 'Jesus Loves Me'],
+        [amazingGraceMusic, receiveWordButton, 'grace-stop-indicator', 'Amazing Grace']
+    ];
+    tracks.forEach(([audio, button, indicator, title]) => {
+        const playing = !audio.paused;
+        document.getElementById(indicator).classList.toggle('is-playing', playing);
+        button.setAttribute('aria-label', playing ? 'Stop ' + title : 'Play ' + title);
+        button.setAttribute('aria-pressed', String(playing));
+    });
+}
+[friendJesusMusic, jesusLovesMeMusic, amazingGraceMusic].forEach(audio => {
+    audio.addEventListener('play', syncSunsetAudioIndicators);
+    audio.addEventListener('pause', syncSunsetAudioIndicators);
+    audio.addEventListener('ended', syncSunsetAudioIndicators);
+});
+syncSunsetAudioIndicators();
+
     
 friendHymnButton.addEventListener('click', function () {
     if (!friendJesusMusic.paused) {
