@@ -887,6 +887,35 @@ footer {
     transform: translateY(-2px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
+
+.gospel-listen {
+    margin: 18px auto 25px;
+    text-align: center;
+}
+
+#friend-hymn-button {
+    padding: 12px 24px;
+    border: 1px solid rgba(111, 75, 139, 0.25);
+    border-radius: 30px;
+    background: #ffffff;
+    color: #6f4b8b;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+#friend-hymn-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.gospel-listen p {
+    margin: 8px 0 0;
+    font-size: 0.95rem;
+    font-style: italic;
+}
         
 .bible-reading {
     max-width: 600px;
@@ -1061,18 +1090,25 @@ footer {
     <h2>A Word for Today</h2>
 
     <p id="daily-date"></p>
-    
+
     <button type="button" id="receive-word">
     📖 Receive Today's Word
 </button>
 
-    <div class="daily-bible-image">
+<div class="gospel-listen">
+    <button type="button" id="friend-hymn-button">
+        🎵 Touch & Listen
+    </button>
+    <p>What a Friend We Have in Jesus</p>
+</div>
+
+<div class="daily-bible-image">
     <img src="Golden Sunrise Devotional Scene.png"
          alt="Open Bible overlooking a peaceful sunrise lake">
 
     <div id="bible-word-overlay"></div>
 </div>
-
+    
     <div class="daily-card">
 
 <div class="bible-reading">
@@ -2262,15 +2298,40 @@ const bibleWordOverlay = document.getElementById('bible-word-overlay');
 receiveWordButton.addEventListener('click', function () {
     bibleWordOverlay.textContent = hourlyScripture;
     bibleWordOverlay.classList.add('show');
+
+    friendJesusMusic.pause();
+    friendJesusMusic.currentTime = 0;
+
     amazingGraceMusic.currentTime = 0;
     amazingGraceMusic.play();
 });
 
 const listenPrayerButton = document.getElementById('listen-prayer');
-
 const amazingGraceMusic = new Audio('music_for_videos-amazing-grace-146071.mp3');
 amazingGraceMusic.volume = 0.12;
 amazingGraceMusic.loop = true;
+
+const friendJesusMusic = new Audio('music_for_videos-what-a-friend-we-have-in-jesus-146076.mp3');
+friendJesusMusic.volume = 0.12;
+friendJesusMusic.loop = true;
+
+const friendHymnButton = document.getElementById('friend-hymn-button');
+
+friendHymnButton.addEventListener('click', function () {
+    if (!friendJesusMusic.paused) {
+        friendJesusMusic.pause();
+        friendJesusMusic.currentTime = 0;
+        friendHymnButton.textContent = '🎵 Touch & Listen';
+        return;
+    }
+
+    amazingGraceMusic.pause();
+    amazingGraceMusic.currentTime = 0;
+
+    friendJesusMusic.currentTime = 0;
+    friendJesusMusic.play();
+    friendHymnButton.textContent = '■ Stop Hymn';
+});
     
 listenPrayerButton.addEventListener('click', function() {
 
