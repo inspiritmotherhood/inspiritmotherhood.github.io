@@ -2301,11 +2301,20 @@ receiveWordButton.addEventListener('click', function () {
     bibleWordOverlay.textContent = hourlyScripture;
     bibleWordOverlay.classList.add('show');
 
+    if (!amazingGraceMusic.paused) {
+        amazingGraceMusic.pause();
+        amazingGraceMusic.currentTime = 0;
+        receiveWordButton.textContent = "📖 Receive Today's Word";
+        return;
+    }
+
     friendJesusMusic.pause();
     friendJesusMusic.currentTime = 0;
+    friendHymnButton.textContent = '🎵 Touch & Listen';
 
     amazingGraceMusic.currentTime = 0;
     amazingGraceMusic.play();
+    receiveWordButton.textContent = '■ Stop Music';
 });
 
 const listenPrayerButton = document.getElementById('listen-prayer');
