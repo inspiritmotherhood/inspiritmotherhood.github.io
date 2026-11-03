@@ -333,77 +333,96 @@ margin: 30px auto;
     padding-top: 35px;
 }
 
+/* Jesus invitation: a spacious, distinct ministry centerpiece */
 .jesus-invitation {
-    background: linear-gradient(145deg, #fffaf1, #f7e9db);
-    border: 2px solid #8b392f;
-    border-top: 7px solid #7c242a;
-    border-radius: 18px;
-    margin: 45px auto 0;
-    padding: 36px 24px;
-    max-width: 820px;
-    box-sizing: border-box;
-    box-shadow: 0 12px 32px rgba(82, 37, 30, 0.13);
-}
-
-/* A wooden cross with crimson cloth, created in CSS without external images. */
-.invitation-cross {
     position: relative;
-    width: 140px;
-    height: 178px;
-    margin: 0 auto 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100vw - 48px);
+    max-width: 1160px;
+    margin: 60px 0 0;
+    padding: 55px clamp(18px, 5vw, 65px) 60px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 24px;
+    border: 1px solid #c19a68;
+    border-top: 8px solid #7d1c27;
+    background:
+        radial-gradient(ellipse at 50% 17%, rgba(255, 248, 205, .98) 0%, rgba(255, 221, 163, .65) 24%, transparent 58%),
+        linear-gradient(155deg, #fff6df 0%, #efd4b5 46%, #b57b70 100%);
+    box-shadow: 0 22px 50px rgba(66, 31, 35, .23);
+    color: #3e2527;
+    text-align: center;
 }
-.invitation-cross::before,
-.invitation-cross::after {
+.jesus-invitation::before {
     content: "";
     position: absolute;
-    background: repeating-linear-gradient(90deg, #674027 0 5px, #845335 5px 9px, #9a6841 9px 12px);
-    border: 1px solid #56301d;
-    border-radius: 3px;
-    box-shadow: 3px 4px 9px rgba(60, 28, 18, 0.24);
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(125deg, transparent 15%, rgba(255,255,255,.24) 50%, transparent 78%);
 }
-.invitation-cross::before {
-    width: 30px;
-    height: 175px;
-    left: 55px;
-    top: 0;
+.jesus-invitation > * { position: relative; z-index: 1; }
+.jesus-invitation h3 {
+    color: #641c28;
+    font: bold clamp(2rem, 4.5vw, 3.5rem)/1.15 Georgia, serif;
+    margin: 0 auto 14px;
 }
-.invitation-cross::after {
-    width: 128px;
-    height: 29px;
-    left: 6px;
-    top: 46px;
+.invitation-intro {
+    max-width: 790px;
+    margin: 0 auto 20px;
+    color: #63333a;
+    font: 1.12rem/1.6 Georgia, serif;
 }
+.invitation-cross {
+    position: relative;
+    width: 245px;
+    height: 305px;
+    margin: 28px auto 22px;
+    filter: drop-shadow(8px 10px 9px rgba(68, 30, 22, .28));
+}
+.invitation-cross::before, .invitation-cross::after {
+    content: "";
+    position: absolute;
+    background: repeating-linear-gradient(90deg, #55321f 0 7px, #805032 7px 16px, #a46d46 16px 22px);
+    border: 2px solid #4d2b1c;
+    border-radius: 5px;
+}
+.invitation-cross::before { width: 47px; height: 300px; left: 99px; top: 0; }
+.invitation-cross::after { width: 235px; height: 43px; left: 5px; top: 77px; }
 .invitation-cross-cloth {
     position: absolute;
     z-index: 2;
-    left: 66px;
-    top: 37px;
-    width: 16px;
-    height: 100px;
-    background: linear-gradient(90deg, #7d101b, #bd2735 55%, #7d101b);
-    transform: rotate(-23deg);
-    border-radius: 8px 8px 2px 2px;
-    box-shadow: 2px 2px 5px rgba(40, 0, 0, 0.18);
+    left: 115px;
+    top: 61px;
+    width: 32px;
+    height: 200px;
+    background: linear-gradient(90deg, #690e1a, #bd2334 50%, #7d101d);
+    border-radius: 15px 15px 5px 5px;
+    transform: rotate(-25deg);
+    box-shadow: 4px 3px 7px rgba(51, 9, 14, .25);
 }
 .invitation-scripture {
-    color: #7c242a;
-    font-family: Georgia, serif;
-    font-size: 1.1rem;
-    font-style: italic;
-    margin: 0 auto 22px;
+    color: #741f2d;
+    font: italic bold 1.35rem/1.5 Georgia, serif;
+    margin: 0 auto 28px;
+}
+.invitation-message {
+    max-width: 790px;
+    margin: 0 auto;
+    padding: 24px clamp(15px, 4vw, 40px);
+    border-radius: 18px;
+    background: rgba(255, 252, 246, .92);
+    border: 1px solid rgba(116, 65, 49, .2);
+    box-shadow: 0 8px 25px rgba(62, 34, 27, .1);
+}
+.invitation-message p { font-size: clamp(1rem, 1.8vw, 1.15rem); line-height: 1.8; }
+.jesus-invitation h4 { color: #741f2d; font: bold 1.65rem Georgia, serif; margin-top: 30px; }
+@media (max-width: 600px) {
+    .jesus-invitation { width: calc(100vw - 24px); padding: 35px 12px 40px; }
+    .invitation-cross { transform: scale(.8); margin: 0 auto -5px; }
+    .invitation-message { padding: 20px 15px; }
 }
 
-.jesus-invitation h3 {
-    color: purple;
-    font-size: 26px;
-    margin-top: 0;
-}
-
-.jesus-invitation h4 {
-    color: purple;
-    font-size: 20px;
-    margin-top: 25px;
-}
         
 #messages h3 {
     color: purple;
@@ -1848,9 +1867,12 @@ others according to the example of Jesus Christ.
 </article>
 
 <div class="jesus-invitation">
-    <div class="invitation-cross" aria-hidden="true"><span class="invitation-cross-cloth"></span></div>
     <h3>An Invitation to Jesus</h3>
+    <p class="invitation-intro">At the heart of In Spirit Motherhood is Jesus Christ — His love, His sacrifice, and the hope of new life through Him.</p>
+    <p class="invitation-intro"><strong>“For God so loved the world, that he gave his only begotten Son” — John 3:16 (KJV)</strong></p>
+    <div class="invitation-cross" aria-hidden="true"><span class="invitation-cross-cloth"></span></div>
     <p class="invitation-scripture">“It is finished.” — John 19:30 (KJV)</p>
+    <div class="invitation-message">
 
     <p>
         If you are reading these words and you have never placed your faith
@@ -1893,6 +1915,7 @@ others according to the example of Jesus Christ.
             — Romans 10:13 (KJV)
         </strong>
     </p>
+    </div>
 </div>
         
 </section>
