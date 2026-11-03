@@ -822,6 +822,29 @@ footer {
     }
 }
         
+/* Welcoming devotional header and coordinated worship cards. */
+.daily-welcome { position: relative; max-width: 750px; margin: 0 auto 30px; padding: 32px 22px 25px; text-align: center; }
+.daily-sun { display: block; color: #ba8146; font-size: 2.8rem; line-height: 1; text-shadow: 0 0 22px rgba(255,196,86,.55); animation: devotionalGlow 6s ease-in-out infinite; }
+@keyframes devotionalGlow { 0%,100% { opacity: .7; transform: scale(.95); } 50% { opacity: 1; transform: scale(1.1); } }
+.daily-welcome .daily-label { color: #7a3b68; font-size: .85rem; letter-spacing: .24em; margin: 15px 0 9px; font-weight: 800; }
+.daily-welcome h2 { color: #572846; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.15; margin: 8px 0 14px; }
+.daily-subtitle { font-family: Georgia, 'Times New Roman', serif; font-size: 1.12rem; color: #6b4b54; line-height: 1.65; margin: 0 auto 15px; }
+.daily-welcome #daily-date { display: inline-block; padding: 9px 19px; border: 1px solid rgba(119,62,94,.2); border-radius: 30px; background: rgba(255,255,255,.65); color: #68405d; font-style: normal; font-weight: 600; margin: 4px auto 20px; }
+.daily-welcome #receive-word { background: linear-gradient(115deg,#79365e,#ad567b); border: 1px solid rgba(255,255,255,.5); box-shadow: 0 9px 23px rgba(115,45,80,.22); padding: 17px 29px; font-size: 1.07rem; margin: 8px auto 12px; }
+.daily-welcome #receive-word:hover, .daily-welcome #receive-word:focus-visible { transform: translateY(-3px); box-shadow: 0 13px 27px rgba(115,45,80,.32); }
+.daily-instruction { color: #725e62; font-size: .88rem; margin: 8px 0 0; }
+.daily-worship { max-width: 760px; margin: 0 auto 12px; padding: 18px 18px 23px; border-top: 1px solid rgba(131,74,104,.2); text-align: center; }
+.worship-eyebrow { font-size: .75rem; font-weight: 800; letter-spacing: .19em; color: #956b78; margin: 0 0 7px; }
+.daily-worship h3 { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.25rem,3vw,1.65rem); color: #63364e; margin: 0 0 19px; }
+.daily-music-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; }
+.daily-music-grid .gospel-listen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 175px; margin: 0; padding: 22px 12px; border-radius: 20px; border: 1px solid rgba(132,76,108,.19); background: rgba(255,255,255,.76); box-shadow: 0 7px 22px rgba(91,51,79,.09); box-sizing: border-box; }
+.music-note { font-size: 1.7rem; color: #aa6e86; line-height: 1; }
+.daily-music-grid .music-title { font-family: Georgia, 'Times New Roman', serif; font-style: normal; font-size: 1.07rem; font-weight: 700; color: #5b3550; margin: 11px 0 15px; }
+.daily-music-grid button { border: 1px solid #9d6486; border-radius: 24px; padding: 10px 18px; background: #fff9fc; color: #783b62; font-weight: 700; cursor: pointer; transition: transform .2s, box-shadow .2s; }
+.daily-music-grid button:hover, .daily-music-grid button:focus-visible { transform: translateY(-2px); box-shadow: 0 5px 16px rgba(100,45,76,.17); }
+@media (max-width: 580px) { .daily-welcome { padding: 20px 5px; } .daily-music-grid { grid-template-columns: 1fr; } .daily-music-grid .gospel-listen { min-height: 145px; } .daily-worship { padding: 15px 0; } }
+@media (prefers-reduced-motion: reduce) { .daily-sun { animation: none; } }
+
 /* ========================================
    DAILY WITH GOD
 ======================================== */
@@ -1355,29 +1378,32 @@ footer {
     
 <section class="daily-with-god" id="daily">
 
-    <p class="daily-label">DAILY WITH GOD</p>
+    <div class="daily-welcome">
+        <span class="daily-sun" aria-hidden="true">✦</span>
+        <p class="daily-label">DAILY WITH GOD</p>
+        <h2>A Word for Today</h2>
+        <p class="daily-subtitle">A quiet moment in His presence. A new word of hope for your heart.</p>
+        <p id="daily-date"></p>
+        <button type="button" id="receive-word">📖 Receive Today's Word</button>
+        <p class="daily-instruction">Let today's Scripture rise from the open Bible below.</p>
+    </div>
 
-    <h2>A Word for Today</h2>
-
-    <p id="daily-date"></p>
-
-    <button type="button" id="receive-word">
-    📖 Receive Today's Word
-</button>
-
-<div class="gospel-listen">
-    <button type="button" id="friend-hymn-button">
-        🎵 Touch & Listen
-    </button>
-    <p>What a Friend We Have in Jesus</p>
-</div>
-
-<div class="gospel-listen">
-    <button type="button" id="jesus-loves-me-button">
-        🎵 Touch & Listen
-    </button>
-    <p>Jesus Loves Me</p>
-</div>
+    <div class="daily-worship">
+        <p class="worship-eyebrow">✦ WORSHIP & REFLECTION ✦</p>
+        <h3>Fill This Moment With Praise</h3>
+        <div class="daily-music-grid">
+            <div class="gospel-listen">
+                <span class="music-note" aria-hidden="true">♫</span>
+                <p class="music-title">What a Friend We Have in Jesus</p>
+                <button type="button" id="friend-hymn-button">▶ Touch & Listen</button>
+            </div>
+            <div class="gospel-listen">
+                <span class="music-note" aria-hidden="true">♫</span>
+                <p class="music-title">Jesus Loves Me</p>
+                <button type="button" id="jesus-loves-me-button">▶ Touch & Listen</button>
+            </div>
+        </div>
+    </div>
 
 <div class="daily-bible-image">
     <img src="Golden Sunrise Devotional Scene.png"
