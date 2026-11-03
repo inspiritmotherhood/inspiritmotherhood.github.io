@@ -836,6 +836,33 @@ footer {
     animation: gentleDevotionalMove 20s ease-in-out infinite;
 }
 
+/* Slow living atmosphere around the daily Bible. */
+.daily-with-god {
+    background-color: #fff4e5;
+    background-blend-mode: normal;
+    transition: background-image .8s ease;
+    box-shadow: 0 15px 45px rgba(87, 56, 79, .14);
+}
+.daily-bible-image {
+    isolation: isolate;
+}
+.daily-bible-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 28%, rgba(255, 235, 164, .19) 48%, transparent 65%);
+    animation: livingLightSweep 16s ease-in-out infinite;
+}
+@keyframes livingLightSweep {
+    0%, 100% { opacity: .2; transform: translateX(-18%); }
+    50% { opacity: .9; transform: translateX(18%); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .daily-with-god, .daily-bible-image::before { animation: none !important; }
+}
+
 @keyframes gentleDevotionalMove {
     0% {
         background-size: 100% auto;
@@ -2523,11 +2550,20 @@ const hourlyScripture = hourlyScriptures[currentHour];
 
 const dailySection = document.querySelector('.daily-with-god');
 
-dailySection.style.backgroundImage =  "none";
-   
-dailySection.style.backgroundSize = 'cover';
-dailySection.style.backgroundPosition = 'center';
-dailySection.style.backgroundRepeat = 'no-repeat';
+// Change the devotional backdrop each day using the seven existing Scripture images.
+// The selected image and Scripture use the same day index.
+function updateDailyBackdrop() {
+    const now = new Date();
+    const index = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000) % dailyDevotionals.length;
+    const image = dailyDevotionals[index].background;
+    dailySection.style.backgroundImage = 'linear-gradient(rgba(255, 250, 242, .77), rgba(255, 250, 242, .86)), url(' + JSON.stringify(image) + ')';
+    dailySection.style.backgroundSize = 'cover';
+    dailySection.style.backgroundPosition = 'center';
+    dailySection.style.backgroundRepeat = 'no-repeat';
+}
+updateDailyBackdrop();
+// Refresh while the page remains open, including across midnight.
+setInterval(updateDailyBackdrop, 60000);
 
 document.getElementById('daily-date').textContent =
     today.toLocaleDateString(undefined, {
