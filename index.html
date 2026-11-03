@@ -822,6 +822,37 @@ footer {
     }
 }
         
+/* Show only the central Bible landscape from the uploaded poster: its
+   printed title, date, and buttons must not duplicate the live controls. */
+.daily-bible-image {
+    width: 100%; max-width: 980px;
+    aspect-ratio: 1536 / 365;
+    overflow: hidden;
+    border-radius: 18px;
+    margin: 15px auto 32px;
+    box-shadow: 0 9px 30px rgba(79,36,44,.15);
+}
+.daily-bible-image img {
+    width: 100%; max-width: none;
+    height: auto;
+    border-radius: 0;
+    box-shadow: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+    transform: translateY(-43%);
+    animation: sunsetBibleBreath 16s ease-in-out infinite;
+}
+@keyframes sunsetBibleBreath {
+    0%,100% { transform: translateY(-43%) scale(1); filter: brightness(1); }
+    50% { transform: translateY(-43%) scale(1.018); filter: brightness(1.05); }
+}
+@media (max-width: 600px) {
+    .daily-bible-image { aspect-ratio: 1536 / 420; border-radius: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .daily-bible-image img { animation: none; }
+}
+
 /* Sunset-inspired burgundy and gold devotional styling. */
 .daily-with-god { max-width: 1100px; background-color: #f8e9d6; }
 .daily-welcome { max-width: 900px; padding-top: 35px; }
@@ -1424,7 +1455,7 @@ footer {
     </div>
 
 <div class="daily-bible-image">
-    <img src="Golden Sunrise Devotional Scene.png"
+    <img src="Daily With God_ Sunset Devotional.png"
          alt="Open Bible overlooking a peaceful sunrise lake">
 
     <div class="cloud-breath"></div>
