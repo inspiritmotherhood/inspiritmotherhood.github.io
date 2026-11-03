@@ -1181,6 +1181,13 @@ footer {
     <p>What a Friend We Have in Jesus</p>
 </div>
 
+<div class="gospel-listen">
+    <button type="button" id="jesus-loves-me-button">
+        🎵 Touch & Listen
+    </button>
+    <p>Jesus Loves Me</p>
+</div>
+
 <div class="daily-bible-image">
     <img src="Golden Sunrise Devotional Scene.png"
          alt="Open Bible overlooking a peaceful sunrise lake">
@@ -2408,6 +2415,12 @@ friendJesusMusic.loop = true;
 
 const friendHymnButton = document.getElementById('friend-hymn-button');
 
+const jesusLovesMeMusic = new Audio('music_for_videos-jesus-loves-me-164245.mp3');
+jesusLovesMeMusic.volume = 0.12;
+jesusLovesMeMusic.loop = true;
+
+const jesusLovesMeButton = document.getElementById('jesus-loves-me-button');
+    
 friendHymnButton.addEventListener('click', function () {
     if (!friendJesusMusic.paused) {
         friendJesusMusic.pause();
@@ -2419,9 +2432,33 @@ friendHymnButton.addEventListener('click', function () {
     amazingGraceMusic.pause();
     amazingGraceMusic.currentTime = 0;
 
+    jesusLovesMeMusic.pause();
+    jesusLovesMeMusic.currentTime = 0;
+    jesusLovesMeButton.textContent = '🎵 Touch & Listen';
+
     friendJesusMusic.currentTime = 0;
     friendJesusMusic.play();
     friendHymnButton.textContent = '■ Stop Hymn';
+});
+    
+jesusLovesMeButton.addEventListener('click', function () {
+    if (!jesusLovesMeMusic.paused) {
+        jesusLovesMeMusic.pause();
+        jesusLovesMeMusic.currentTime = 0;
+        jesusLovesMeButton.textContent = '🎵 Touch & Listen';
+        return;
+    }
+
+    amazingGraceMusic.pause();
+    amazingGraceMusic.currentTime = 0;
+
+    friendJesusMusic.pause();
+    friendJesusMusic.currentTime = 0;
+    friendHymnButton.textContent = '🎵 Touch & Listen';
+
+    jesusLovesMeMusic.currentTime = 0;
+    jesusLovesMeMusic.play();
+    jesusLovesMeButton.textContent = '■ Stop Hymn';
 });
     
 listenPrayerButton.addEventListener('click', function() {
