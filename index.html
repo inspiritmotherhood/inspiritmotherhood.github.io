@@ -1366,6 +1366,14 @@ footer {
 .youtube-ministry {margin-top:24px;padding:18px;border-top:1px solid #dfc59f;}
 .word-of-god-section blockquote {font-family:Georgia,serif;font-size:clamp(1.1rem,2.5vw,1.4rem);font-style:italic;margin:18px auto;max-width:740px;color:#68223d;}
 .word-of-god-section h3 {font-family:Georgia,serif;color:#76203f;}
+
+.ministry-qr-section {margin:32px auto 26px;padding:25px 15px;border:1px solid #d7b16d;border-radius:22px;background:#fff9f0;max-width:720px;}
+.ministry-qr-section h3 {font-family:Georgia,serif;font-size:clamp(1.5rem,3vw,2rem);color:#741d3d;}
+.ministry-qr-image {display:block;width:min(100%,300px);height:auto;aspect-ratio:1;margin:18px auto;padding:12px;box-sizing:border-box;background:white;border:3px solid #c99c52;border-radius:17px;box-shadow:0 8px 24px rgba(84,30,50,.13);}
+.qr-address a {color:#741d3d;font-weight:bold;overflow-wrap:anywhere;}
+.qr-share-actions {display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:15px auto;}
+.qr-share-actions button,.qr-share-actions a {border:1px solid #c99c52;background:#741d3d;color:white;text-decoration:none;padding:10px 16px;border-radius:24px;font-weight:bold;font-size:.95rem;cursor:pointer;}
+#qr-share-status {min-height:1.3em;font-size:.9rem;}
 </style>
 
 </head>
@@ -1535,7 +1543,16 @@ footer {
     <p id="android-install-help"><strong>Android:</strong> Open this website in Chrome, tap the menu (⋮), then choose <strong>Install app</strong> or <strong>Add to Home screen</strong>.</p>
   </div>
   <p class="app-store-note">This is a home-screen web app, not yet an Apple App Store or Google Play Store listing.</p>
-  <div class="youtube-ministry"><h3>Our YouTube Ministry</h3><p>Scripture teachings, prayer, and encouragement are coming to this space. We will add the official channel when it is ready.</p></div>
+  <div class="ministry-qr-section" id="scan-and-pray">
+  <p class="ministry-eyebrow">✦ SHARE THE LIGHT ✦</p>
+  <h3>Scan &amp; Pray With Us</h3>
+  <p>Point your phone camera at this code to open In Spirit Motherhood. Share it with family, friends, and your church community.</p>
+  <a href="https://inspiritmotherhood.github.io/" aria-label="Open In Spirit Motherhood ministry homepage"><img class="ministry-qr-image" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&amp;margin=12&amp;data=https%3A%2F%2Finspiritmotherhood.github.io%2F" alt="QR code linking to In Spirit Motherhood homepage" width="300" height="300" loading="lazy"></a>
+  <p class="qr-address"><a href="https://inspiritmotherhood.github.io/">inspiritmotherhood.github.io</a></p>
+  <div class="qr-share-actions"><button type="button" id="share-ministry-link">↗ Share Ministry Link</button><button type="button" id="copy-ministry-link">📋 Copy Website Link</button><a href="https://api.qrserver.com/v1/create-qr-code/?size=900x900&amp;margin=24&amp;data=https%3A%2F%2Finspiritmotherhood.github.io%2F" target="_blank" rel="noopener noreferrer">⬇ Open Printable QR Code</a></div>
+  <p id="qr-share-status" role="status" aria-live="polite"></p>
+</div>
+<div class="youtube-ministry"><h3>Our YouTube Ministry</h3><p>Scripture teachings, prayer, and encouragement are coming to this space. We will add the official channel when it is ready.</p></div>
 </section>
 <section class="word-of-god-section" id="word-of-god">
   <p class="ministry-eyebrow">✦ SCRIPTURE & REFLECTION ✦</p>
@@ -2952,6 +2969,14 @@ const ministryInstallButton=document.getElementById('install-ministry-app');
 window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();ministryInstallPrompt=event;ministryInstallButton.hidden=false;});
 ministryInstallButton.addEventListener('click',async()=>{if(!ministryInstallPrompt)return;ministryInstallPrompt.prompt();await ministryInstallPrompt.userChoice;ministryInstallPrompt=null;ministryInstallButton.hidden=true;});
 window.addEventListener('appinstalled',()=>{ministryInstallPrompt=null;ministryInstallButton.hidden=true;});
+</script>
+<script>
+(function(){
+const url='https://inspiritmotherhood.github.io/';
+const status=document.getElementById('qr-share-status');
+document.getElementById('copy-ministry-link').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(url);status.textContent='Website link copied!';}catch(e){status.textContent='Copy this address: '+url;}});
+document.getElementById('share-ministry-link').addEventListener('click',async()=>{if(navigator.share){try{await navigator.share({title:'In Spirit Motherhood',text:'Join us for daily Scripture, devotionals and prayer.',url});}catch(e){if(e.name!=='AbortError')status.textContent='You can share this link: '+url;}}else{try{await navigator.clipboard.writeText(url);status.textContent='Link copied—ready to share!';}catch(e){status.textContent='Share this address: '+url;}}});
+})();
 </script>
 </body>
     
