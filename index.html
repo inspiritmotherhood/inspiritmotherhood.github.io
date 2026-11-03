@@ -1320,7 +1320,23 @@ footer {
     }
 }
         
-    </style>
+    
+/* The sunset poster itself is the devotional interface. Transparent, keyboard-accessible
+   hit areas activate real music and Scripture controls without duplicated panels. */
+.daily-with-god .daily-bible-image { position:relative; width:100%; max-width:1100px; aspect-ratio:1536/1024; height:auto; overflow:hidden; margin:0 auto 30px; border-radius:15px; }
+.daily-with-god .daily-bible-image > img { display:block; width:100%; height:100%; max-width:none; object-fit:fill; transform:none !important; animation:none !important; filter:none; -webkit-mask-image:none; mask-image:none; }
+.daily-with-god .sunset-hit { position:absolute; z-index:12; display:block; padding:0 !important; margin:0 !important; border:0 !important; border-radius:24px; background:transparent !important; color:transparent !important; font-size:0 !important; box-shadow:none !important; cursor:pointer; transition:box-shadow .2s; }
+.daily-with-god .sunset-hit:hover { box-shadow:inset 0 0 0 3px rgba(255,245,194,.85) !important; transform:none !important; }
+.daily-with-god .sunset-hit:focus-visible { outline:3px solid #fff; outline-offset:2px; box-shadow:0 0 0 5px #761738 !important; }
+.daily-with-god .sunset-receive { left:31%; top:30.7%; width:38%; height:7.7%; }
+.daily-with-god .sunset-friend { left:11.3%; top:85.5%; width:39.2%; height:11%; }
+.daily-with-god .sunset-jesus { left:52.5%; top:85.5%; width:36.2%; height:11%; }
+.daily-with-god .sunset-live-date { position:absolute; z-index:10; top:23.2%; left:34%; width:32%; height:6%; display:flex; align-items:center; justify-content:center; box-sizing:border-box; margin:0; padding:0 5px; border:2px solid #d6a54d; border-radius:100px; background:#ffebc7; color:#651b37; font-family:Georgia,serif; font-size:clamp(9px,2.1vw,25px); font-weight:bold; white-space:nowrap; box-shadow:0 2px 9px rgba(80,35,36,.2); }
+.daily-with-god .daily-bible-image .cloud-breath, .daily-with-god .daily-bible-image .water-shimmer, .daily-with-god .daily-bible-image .bible-sun-sparkles, .daily-with-god .daily-bible-image .bible-steam { pointer-events:none; }
+.daily-with-god #bible-word-overlay { z-index:11; top:58%; width:60%; box-sizing:border-box; font-size:clamp(12px,2vw,24px); }
+@media(max-width:600px) { .daily-with-god .sunset-live-date { border-width:1px; } .daily-with-god #bible-word-overlay { padding:7px; } }
+
+</style>
 
 </head>
 
@@ -1427,37 +1443,14 @@ footer {
     
 <section class="daily-with-god" id="daily">
 
-    <div class="daily-welcome">
-        <span class="daily-sun" aria-hidden="true">✦</span>
-        <p class="daily-label">DAILY WITH GOD</p>
-        <h2>A Word for Today</h2>
-        <p class="daily-subtitle">A quiet moment in His presence. A new word of hope for your heart.</p>
-        <p id="daily-date"></p>
-        <button type="button" id="receive-word">📖 Receive Today's Word</button>
-        <p class="daily-instruction">Let today's Scripture rise from the open Bible below.</p>
-    </div>
-
-    <div class="daily-worship">
-        <p class="worship-eyebrow">✦ WORSHIP & REFLECTION ✦</p>
-        <h3>Fill This Moment With Praise</h3>
-        <div class="daily-music-grid">
-            <div class="gospel-listen">
-                <span class="music-note" aria-hidden="true">♫</span>
-                <p class="music-title">What a Friend We Have in Jesus</p>
-                <button type="button" id="friend-hymn-button">▶ Touch & Listen</button>
-            </div>
-            <div class="gospel-listen">
-                <span class="music-note" aria-hidden="true">♫</span>
-                <p class="music-title">Jesus Loves Me</p>
-                <button type="button" id="jesus-loves-me-button">▶ Touch & Listen</button>
-            </div>
-        </div>
-    </div>
-
 <div class="daily-bible-image">
     <img src="Daily With God_ Sunset Devotional.png"
          alt="Open Bible overlooking a peaceful sunrise lake">
 
+    <p id="daily-date" class="sunset-live-date"></p>
+    <button type="button" id="receive-word" class="sunset-hit sunset-receive" aria-label="Receive today's Word">Receive Today's Word</button>
+    <button type="button" id="friend-hymn-button" class="sunset-hit sunset-friend" aria-label="Play or stop What a Friend We Have in Jesus">Touch & Listen</button>
+    <button type="button" id="jesus-loves-me-button" class="sunset-hit sunset-jesus" aria-label="Play or stop Jesus Loves Me">Touch & Listen</button>
     <div class="cloud-breath"></div>
     <div class="water-shimmer"></div>
     <div class="bible-sun-sparkles" aria-hidden="true"></div>
