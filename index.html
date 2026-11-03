@@ -1374,6 +1374,19 @@ footer {
 .qr-share-actions {display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:15px auto;}
 .qr-share-actions button,.qr-share-actions a {border:1px solid #c99c52;background:#741d3d;color:white;text-decoration:none;padding:10px 16px;border-radius:24px;font-weight:bold;font-size:.95rem;cursor:pointer;}
 #qr-share-status {min-height:1.3em;font-size:.9rem;}
+
+.youtube-ministry {margin:32px auto 12px;padding:clamp(22px,4vw,42px);max-width:850px;border:1px solid #d9b77f;border-radius:25px;background:linear-gradient(155deg,#fffaf2,#f6e4df);box-shadow:0 8px 24px rgba(89,29,52,.12);}
+.youtube-ministry .youtube-icon-mark {width:72px;height:52px;display:flex;align-items:center;justify-content:center;border-radius:17px;background:#a51d38;color:white;font-size:26px;margin:16px auto;box-shadow:0 6px 18px rgba(106,21,48,.2);}
+.youtube-ministry h3 {font-family:Georgia,serif;color:#76203f;font-size:clamp(1.6rem,3.5vw,2.6rem);margin:12px auto;}
+.youtube-ministry .youtube-tagline {font-family:Georgia,serif;font-style:italic;color:#a06d37;font-size:1.2rem;}
+.youtube-topics {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:25px auto;}
+.youtube-topics>div {display:flex;flex-direction:column;align-items:center;gap:7px;background:#fffdf8;border:1px solid #e4c99f;border-radius:17px;padding:19px 12px;}
+.youtube-topics span {font-size:1.8rem;}
+.youtube-topics strong {font-family:Georgia,serif;color:#72213e;}
+.youtube-topics small {font-size:.88rem;color:#71515c;line-height:1.5;}
+.youtube-launch-note {font-size:.92rem;color:#775765;}
+.youtube-start-link {display:inline-block;margin:15px auto 0;padding:12px 24px;border:1px solid #d6a35b;border-radius:28px;background:#76203f;color:white;text-decoration:none;font-weight:bold;}
+@media(max-width:520px){.youtube-topics{grid-template-columns:1fr;}}
 </style>
 
 </head>
@@ -1552,7 +1565,21 @@ footer {
   <div class="qr-share-actions"><button type="button" id="share-ministry-link">↗ Share Ministry Link</button><button type="button" id="copy-ministry-link">📋 Copy Website Link</button><a href="https://api.qrserver.com/v1/create-qr-code/?size=900x900&amp;margin=24&amp;data=https%3A%2F%2Finspiritmotherhood.github.io%2F" target="_blank" rel="noopener noreferrer">⬇ Open Printable QR Code</a></div>
   <p id="qr-share-status" role="status" aria-live="polite"></p>
 </div>
-<div class="youtube-ministry"><h3>Our YouTube Ministry</h3><p>Scripture teachings, prayer, and encouragement are coming to this space. We will add the official channel when it is ready.</p></div>
+<div class="youtube-ministry" id="youtube-ministry">
+  <p class="ministry-eyebrow">✦ WATCH · PRAY · GROW ✦</p>
+  <div class="youtube-icon-mark" aria-hidden="true">▶</div>
+  <h3>In Spirit Motherhood on YouTube</h3>
+  <p class="youtube-tagline">Faith, Prayer &amp; God's Word</p>
+  <p>Welcome to a place for Scripture, prayer, encouragement, and stories of God's faithfulness. Our YouTube ministry is being prepared with love.</p>
+  <div class="youtube-topics">
+    <div><span aria-hidden="true">📖</span><strong>365 Days With God</strong><small>Daily Scripture and devotional reflections</small></div>
+    <div><span aria-hidden="true">🙏</span><strong>Let Us Pray</strong><small>Prayers for peace, strength, and families</small></div>
+    <div><span aria-hidden="true">✝</span><strong>Jesus Is the Word</strong><small>Christ-centered Bible teaching</small></div>
+    <div><span aria-hidden="true">💛</span><strong>Testimony &amp; Hope</strong><small>Stories of grace and encouragement</small></div>
+  </div>
+  <p class="youtube-launch-note">Our first videos and official channel link will appear here once the channel is ready.</p>
+  <a class="youtube-start-link" href="https://www.youtube.com/create_channel" target="_blank" rel="noopener noreferrer">Set Up the YouTube Channel</a>
+</div>
 </section>
 <section class="word-of-god-section" id="word-of-god">
   <p class="ministry-eyebrow">✦ SCRIPTURE & REFLECTION ✦</p>
