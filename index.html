@@ -128,23 +128,24 @@
             font-size: 20px;
         }
 
-        .profile-photo {
-            width: 150px;
-            height: auto;
-            border: 6px solid purple;
-            border-radius: 20px;
-            padding: 4px;
-            box-shadow: 0 4px 10px gray;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-        }
+       #profile-lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.78);
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    cursor: pointer;
+}
 
-        .book-cover {
-              width: 140px;
-              height: auto;
-              border-radius: 8px;
-        }
+#profile-lightbox img {
+    max-width: 90%;
+    max-height: 90vh;
+    border-radius: 20px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.45);
+}
 
         nav {
             background-color: purple;
@@ -433,7 +434,41 @@ margin: 30px auto;
     margin: 20px auto;
     display: block;
 }
-    
+.profile-photo {
+    width: 150px;
+    height: auto;
+    border: 6px solid purple;
+    border-radius: 20px;
+    padding: 4px;
+    box-shadow: 0 4px 10px gray;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+#profile-lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.78);
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    cursor: pointer;
+}
+
+#profile-lightbox img {
+    max-width: 90%;
+    max-height: 90vh;
+    border-radius: 20px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.45);
+}
+
+.book-cover {
+    width: 140px;
+    height: auto;
+    border-radius: 8px;    
 }
 
 .contact-box input,
@@ -1233,11 +1268,18 @@ footer {
        and encouraging others.
     </p>
 
-    <a href="freweyni-profile.png" target="_blank">
-    <img class="profile-photo" src="freweyni-profile.png" alt="Freweyni, author of In Spirit Motherhood">
-</a>
+   <img class="profile-photo"
+     src="freweyni-profile.png"
+     alt="Freweyni, author of In Spirit Motherhood"
+     onclick="openProfilePhoto()"
+     style="cursor: pointer;">
    
 </div>    
+
+    <div id="profile-lightbox" onclick="closeProfilePhoto()">
+    <img src="freweyni-profile.png"
+         alt="Freweyni, author of In Spirit Motherhood">
+</div>
     
     <div class="books-intro">
         
@@ -1991,6 +2033,15 @@ needResponse.scrollIntoView({
 
 <script>
 
+function openProfilePhoto() {
+    document.getElementById('profile-lightbox').style.display = 'flex';
+}
+
+function closeProfilePhoto() {
+    document.getElementById('profile-lightbox').style.display = 'none';
+}
+ </script>
+    
 /* ========================================
    NONSTOP PRAYER ROOM
    Hourly Prayer Library
