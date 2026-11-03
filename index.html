@@ -1344,6 +1344,11 @@ footer {
 .daily-with-god .sunset-stop-jesus { left:65%; top:90.6%; width:20%; height:4.3%; }
 .daily-with-god .sunset-stop-grace { left:39%; top:33.5%; width:22%; height:4.5%; }
 
+
+.reading-navigation { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px; margin:8px auto 25px; }
+.reading-navigation button { background:#76203f; color:#fff6e7; border:1px solid #cfa35c; border-radius:24px; padding:10px 15px; font-weight:bold; cursor:pointer; }
+.reading-navigation button:disabled { opacity:.4; cursor:not-allowed; }
+.reading-navigation #reading-progress { color:#67233d; font-family:Georgia,serif; font-weight:bold; padding:8px; }
 </style>
 
 </head>
@@ -1472,6 +1477,12 @@ footer {
     
     <div class="daily-card">
 
+<nav class="reading-navigation" aria-label="Daily devotional navigation">
+<button type="button" id="reading-prev">← Previous Day</button>
+<span id="reading-progress" aria-live="polite">Day 1 of 365</span>
+<button type="button" id="reading-next">Next Day →</button>
+<button type="button" id="reading-today">Today</button>
+</nav>
 <div class="bible-reading">
 
     <h3>Today's Scripture</h3>
@@ -2620,13 +2631,49 @@ const dailyDevotionals = [
     
 ];
 
+// Year-round readings: seven original devotionals plus 358 day-specific
+// reflections and prayers. References are paraphrased, not presented as quotations.
+const yearlyScriptureThemes = [
+ ['Psalm 27:1','God is our light and salvation','courage'],['Isaiah 41:10','God promises His sustaining presence','courage'],['Matthew 6:34','Bring your attention back to today','peace'],['Romans 8:28','God can work through difficult circumstances','hope'],['Psalm 34:18','God is near the brokenhearted','healing'],['Ephesians 4:32','Practice kindness and forgiveness','forgiveness'],['Colossians 3:23','Serve wholeheartedly in everyday work','service'],['James 1:5','Ask God for wisdom','wisdom'],['Micah 6:8','Walk humbly and act justly','justice'],['Galatians 6:9','Do not grow weary in doing good','perseverance'],['Psalm 121:1-2','Our help comes from the Lord','help'],['1 Thessalonians 5:18','Practice gratitude in every season','gratitude'],['Isaiah 40:31','Those who wait on the Lord renew their strength','renewal'],['John 14:27','Jesus offers His peace','peace'],['Matthew 11:28','Jesus invites the weary to find rest','rest'],['Proverbs 16:3','Commit your work to the Lord','purpose'],['Psalm 91:1-2','Seek refuge in the Most High','safety'],['2 Corinthians 12:9','God’s grace is sufficient in weakness','grace'],['Romans 12:12','Be joyful in hope and faithful in prayer','prayer'],['Hebrews 11:1','Faith trusts what is not yet seen','faith'],['1 Peter 5:7','Bring your anxieties to God','trust'],['Psalm 139:14','You are wonderfully made','identity'],['Philippians 4:6-7','Pray rather than be consumed by worry','peace'],['Joshua 1:9','Be strong and courageous','courage'],['Psalm 46:1','God is refuge and strength','strength'],['Lamentations 3:22-23','God’s mercies are new each morning','mercy'],['John 15:5','Remain connected to Christ','abiding'],['Matthew 5:9','Blessed are the peacemakers','reconciliation'],['Romans 15:13','God fills hearts with hope','hope'],['Proverbs 3:5-6','Trust the Lord to guide your path','guidance'],['Psalm 23:4','God walks with us through dark valleys','comfort'],['1 Corinthians 13:4-7','Love is patient and kind','love'],['Luke 6:36','Be merciful as your Father is merciful','mercy'],['Mark 10:14','Jesus welcomes children','motherhood'],['Deuteronomy 6:6-7','Teach God’s words in daily family life','family'],['Psalm 127:3','Children are a gift from the Lord','family'],['Isaiah 43:19','God can make a new way','new beginnings'],['2 Timothy 1:7','God gives power, love, and self-control','confidence'],['Matthew 6:33','Seek God’s kingdom first','priorities'],['Psalm 37:5','Commit your way to the Lord','trust'],['Hebrews 10:24','Encourage one another toward love','community'],['Acts 20:35','There is blessing in giving','generosity'],['Matthew 25:40','Serve Christ by caring for others','compassion'],['Psalm 30:5','Joy can follow a night of weeping','joy'],['Nehemiah 8:10','The joy of the Lord is strength','joy'],['Ecclesiastes 3:1','There is a season for every purpose','patience'],['James 1:19','Be quick to listen and slow to speak','listening'],['Proverbs 15:1','A gentle answer can turn away anger','gentleness'],['Colossians 3:15','Let the peace of Christ rule your heart','peace'],['Revelation 21:4','God promises an end to sorrow','eternal hope'],['Psalm 100:4','Enter God’s presence with thanksgiving','worship'],['John 13:34','Love one another as Jesus loves us','love']
+];
+const devotionalApproaches = [
+ ['Pause and notice','Today, take a quiet moment to consider how this truth meets the life you are living right now.','Open my eyes to Your presence in ordinary moments.'],
+ ['Take one faithful step','You do not need to solve everything today. Choose one small action that reflects this promise.','Give me courage to take the next faithful step.'],
+ ['Bring your burdens','Name the worry you have been carrying and place it before God in prayer.','Help me surrender what I cannot control.'],
+ ['Encourage another','Let this truth shape the way you speak to someone who needs kindness today.','Make my words a source of hope and kindness.'],
+ ['Practice gratitude','Remember a moment of grace, even if this season has been difficult.','Teach me to recognize and thank You for Your goodness.'],
+ ['Make room for stillness','Turn away from distractions for a few minutes and listen for wisdom in Scripture and prayer.','Quiet my heart so I can listen and respond with wisdom.'],
+ ['Carry it into tomorrow','Consider what this passage invites you to practice beyond today, one day at a time.','Help this truth take root in my choices and relationships.']
+];
+for (let day = dailyDevotionals.length; day < 365; day++) {
+    const [reference, meaning, theme] = yearlyScriptureThemes[(day - 7) % yearlyScriptureThemes.length];
+    const [focus, reflection, prayerFocus] = devotionalApproaches[Math.floor((day - 7) / yearlyScriptureThemes.length) % devotionalApproaches.length];
+    dailyDevotionals.push({
+        scripture: reference + ' — ' + meaning + ' (Scripture reflection)',
+        devotion: 'Day ' + (day + 1) + ' · ' + focus + '. Today’s theme is ' + theme + '. ' + reflection + ' ' + meaning + '. Let this reminder guide how you respond to the people and responsibilities before you.',
+        prayer: 'Heavenly Father, thank You for speaking through Your Word about ' + theme + '. ' + prayerFocus + ' Shape my heart and help me follow Jesus with love and faithfulness. In Jesus’ name, Amen.'
+    });
+}
+
 const today = new Date();
 
-const dayIndex = Math.floor(
-    Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) / 86400000
-) % dailyDevotionals.length;
+const yearStart = new Date(today.getFullYear(), 0, 1);
+const calendarDayIndex = Math.floor((Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()) - Date.UTC(today.getFullYear(), 0, 1)) / 86400000);
+let selectedDayIndex = Math.min(calendarDayIndex, 364); // Leap day shares the final reading.
+let todaysDevotional = dailyDevotionals[selectedDayIndex];
+function renderDailyReading() {
+    const reading = dailyDevotionals[selectedDayIndex];
+    todaysDevotional = reading;
+    const displayDate = new Date(today.getFullYear(), 0, selectedDayIndex + 1);
+    document.getElementById('daily-date').textContent = displayDate.toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    document.getElementById('daily-scripture').textContent = reading.scripture;
+    document.getElementById('daily-devotion').textContent = reading.devotion;
+    document.getElementById('daily-prayer').textContent = reading.prayer;
+    document.getElementById('reading-progress').textContent = 'Day ' + (selectedDayIndex + 1) + ' of 365';
+    document.getElementById('reading-prev').disabled = selectedDayIndex === 0;
+    document.getElementById('reading-next').disabled = selectedDayIndex === 364;
+}
 
-const todaysDevotional = dailyDevotionals[dayIndex];
 const hourlyScriptures = [
     '"When I remember thee upon my bed, and meditate on thee in the night watches." — Psalm 63:6 (KJV)',
     '"The Lord is my shepherd; I shall not want." — Psalm 23:1 (KJV)',
@@ -2663,7 +2710,7 @@ const dailySection = document.querySelector('.daily-with-god');
 // The selected image and Scripture use the same day index.
 function updateDailyBackdrop() {
     const now = new Date();
-    const index = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000) % dailyDevotionals.length;
+    const index = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000) % 7;
     // Rotate subtle color atmospheres instead of placing a second picture behind the Bible.
     const palettes = [
         ['#fff6e8', '#f7e1cc'], ['#fff7ef', '#eadcf0'],
@@ -2681,22 +2728,10 @@ updateDailyBackdrop();
 // Refresh while the page remains open, including across midnight.
 setInterval(updateDailyBackdrop, 60000);
 
-document.getElementById('daily-date').textContent =
-    today.toLocaleDateString(undefined, {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
-
-document.getElementById('daily-scripture').textContent =
-    todaysDevotional.scripture;
-
-document.getElementById('daily-devotion').textContent =
-    todaysDevotional.devotion;
-
-document.getElementById('daily-prayer').textContent =
-    todaysDevotional.prayer;
+renderDailyReading();
+document.getElementById('reading-prev').addEventListener('click', () => { selectedDayIndex--; renderDailyReading(); });
+document.getElementById('reading-next').addEventListener('click', () => { selectedDayIndex++; renderDailyReading(); });
+document.getElementById('reading-today').addEventListener('click', () => { selectedDayIndex = Math.min(calendarDayIndex,364); renderDailyReading(); });
 
 const receiveWordButton = document.getElementById('receive-word');
 const bibleWordOverlay = document.getElementById('bible-word-overlay');
