@@ -2201,6 +2201,35 @@ const dayIndex = Math.floor(
 ) % dailyDevotionals.length;
 
 const todaysDevotional = dailyDevotionals[dayIndex];
+const hourlyScriptures = [
+    '"When I remember thee upon my bed, and meditate on thee in the night watches." — Psalm 63:6 (KJV)',
+    '"The Lord is my shepherd; I shall not want." — Psalm 23:1 (KJV)',
+    '"My soul, wait thou only upon God; for my expectation is from him." — Psalm 62:5 (KJV)',
+    '"I will both lay me down in peace, and sleep: for thou, Lord, only makest me dwell in safety." — Psalm 4:8 (KJV)',
+    '"God is our refuge and strength, a very present help in trouble." — Psalm 46:1 (KJV)',
+    '"My voice shalt thou hear in the morning, O Lord; in the morning will I direct my prayer unto thee." — Psalm 5:3 (KJV)',
+    '"It is of the Lord\'s mercies that we are not consumed, because his compassions fail not." — Lamentations 3:22 (KJV)',
+    '"This is the day which the Lord hath made; we will rejoice and be glad in it." — Psalm 118:24 (KJV)',
+    '"Trust in the Lord with all thine heart; and lean not unto thine own understanding." — Proverbs 3:5 (KJV)',
+    '"Commit thy works unto the Lord, and thy thoughts shall be established." — Proverbs 16:3 (KJV)',
+    '"I can do all things through Christ which strengtheneth me." — Philippians 4:13 (KJV)',
+    '"The Lord is my strength and my shield; my heart trusted in him, and I am helped." — Psalm 28:7 (KJV)',
+    '"Be still, and know that I am God." — Psalm 46:10 (KJV)',
+    '"The Lord is good unto them that wait for him, to the soul that seeketh him." — Lamentations 3:25 (KJV)',
+    '"Casting all your care upon him; for he careth for you." — 1 Peter 5:7 (KJV)',
+    '"For with God nothing shall be impossible." — Luke 1:37 (KJV)',
+    '"Rejoice in the Lord alway: and again I say, Rejoice." — Philippians 4:4 (KJV)',
+    '"The Lord is nigh unto all them that call upon him." — Psalm 145:18 (KJV)',
+    '"Thy word is a lamp unto my feet, and a light unto my path." — Psalm 119:105 (KJV)',
+    '"The Lord shall preserve thy going out and thy coming in from this time forth, and even for evermore." — Psalm 121:8 (KJV)',
+    '"From the rising of the sun unto the going down of the same the Lord\'s name is to be praised." — Psalm 113:3 (KJV)',
+    '"Peace I leave with you, my peace I give unto you." — John 14:27 (KJV)',
+    '"Come unto me, all ye that labour and are heavy laden, and I will give you rest." — Matthew 11:28 (KJV)',
+    '"The Lord will give strength unto his people; the Lord will bless his people with peace." — Psalm 29:11 (KJV)'
+];
+
+const currentHour = today.getHours();
+const hourlyScripture = hourlyScriptures[currentHour];
 
 const dailySection = document.querySelector('.daily-with-god');
 
@@ -2231,7 +2260,7 @@ const receiveWordButton = document.getElementById('receive-word');
 const bibleWordOverlay = document.getElementById('bible-word-overlay');
 
 receiveWordButton.addEventListener('click', function () {
-    bibleWordOverlay.textContent = todaysDevotional.scripture;
+    bibleWordOverlay.textContent = hourlyScripture;
     bibleWordOverlay.classList.add('show');
     amazingGraceMusic.currentTime = 0;
     amazingGraceMusic.play();
