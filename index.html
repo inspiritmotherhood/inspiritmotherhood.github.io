@@ -1006,9 +1006,44 @@ footer {
 }
 
 #bible-word-overlay.show {
-    opacity: 1;
     visibility: visible;
-    transform: translate(-50%, -10px);
+    animation: wordRiseAndReturn 12s ease-in-out both;
+}
+@keyframes wordRiseAndReturn {
+    0% { opacity: 0; transform: translate(-50%, 34px) scale(.88); }
+    14% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+    36% { opacity: 1; transform: translate(-50%, -65px) scale(1.04); }
+    68% { opacity: 1; transform: translate(-50%, -65px) scale(1.04); }
+    88% { opacity: .9; transform: translate(-50%, -12px) scale(.98); }
+    100% { opacity: 0; transform: translate(-50%, 34px) scale(.88); }
+}
+/* Soft golden particles and visible rising steam, without changing the image. */
+.bible-sun-sparkles {
+    position: absolute; inset: 0; z-index: 3; pointer-events: none;
+    background: radial-gradient(circle at 42% 32%, rgba(255,246,185,.9) 0 2px, transparent 4px),
+                radial-gradient(circle at 62% 41%, rgba(255,245,194,.8) 0 2px, transparent 5px),
+                radial-gradient(circle at 54% 23%, rgba(255,255,230,.8) 0 1px, transparent 4px);
+    animation: scriptureSparkle 9s ease-in-out infinite;
+}
+@keyframes scriptureSparkle {
+    0%,100% { opacity: .2; transform: translateY(9px); }
+    50% { opacity: .9; transform: translateY(-16px); }
+}
+.bible-steam {
+    position: absolute; right: 7%; top: 34%; width: 10%; height: 25%;
+    pointer-events: none; z-index: 3;
+    background: radial-gradient(ellipse at 50% 70%, rgba(255,255,255,.5), transparent 70%);
+    filter: blur(9px);
+    animation: scriptureSteam 7s ease-in-out infinite;
+}
+@keyframes scriptureSteam {
+    0% { opacity: 0; transform: translate(0,18px) scale(.7); }
+    35% { opacity: .7; }
+    100% { opacity: 0; transform: translate(-14px,-60px) scale(1.5); }
+}
+@media (prefers-reduced-motion: reduce) {
+    #bible-word-overlay.show { animation: none; opacity: 1; transform: translate(-50%, -10px); }
+    .bible-sun-sparkles, .bible-steam { animation: none; }
 }
         
  .daily-bible-image img {
@@ -1293,8 +1328,10 @@ footer {
 
     <div class="cloud-breath"></div>
     <div class="water-shimmer"></div>
+    <div class="bible-sun-sparkles" aria-hidden="true"></div>
+    <div class="bible-steam" aria-hidden="true"></div>
 
-    <div id="bible-word-overlay"></div>
+    <div id="bible-word-overlay" role="status" aria-live="polite"></div>
 </div>
     
     <div class="daily-card">
@@ -2512,9 +2549,16 @@ document.getElementById('daily-prayer').textContent =
 const receiveWordButton = document.getElementById('receive-word');
 const bibleWordOverlay = document.getElementById('bible-word-overlay');
 
+let wordReturnTimer;
 receiveWordButton.addEventListener('click', function () {
+    clearTimeout(wordReturnTimer);
+    bibleWordOverlay.classList.remove('show');
     bibleWordOverlay.textContent = hourlyScripture;
+    void bibleWordOverlay.offsetWidth; // Restart the rise-and-return journey each time.
     bibleWordOverlay.classList.add('show');
+    wordReturnTimer = setTimeout(function () {
+        bibleWordOverlay.classList.remove('show');
+    }, 12000);
 
     if (!amazingGraceMusic.paused) {
         amazingGraceMusic.pause();
