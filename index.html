@@ -3,6 +3,11 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#741d3d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="In Spirit Motherhood">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" type="image/svg+xml" href="/app-icon.svg">
     <meta name="description" content="In Spirit Motherhood is a Christian ministry by author Freweyni Gebrehiwet, sharing faith, motherhood, testimony, prayer, Christian books, and encouragement through the Word of God.">
     <title>In Spirit Motherhood | Freweyni Gebrehiwet</title>
 
@@ -1349,6 +1354,18 @@ footer {
 .reading-navigation button { background:#76203f; color:#fff6e7; border:1px solid #cfa35c; border-radius:24px; padding:10px 15px; font-weight:bold; cursor:pointer; }
 .reading-navigation button:disabled { opacity:.4; cursor:not-allowed; }
 .reading-navigation #reading-progress { color:#67233d; font-family:Georgia,serif; font-weight:bold; padding:8px; }
+
+.ministry-app-section,.word-of-god-section {max-width:960px;margin:40px auto;padding:clamp(24px,5vw,52px);box-sizing:border-box;border-radius:24px;background:linear-gradient(145deg,#fff5e5,#f8e5dc);border:1px solid #d6b076;box-shadow:0 9px 28px rgba(91,30,53,.12);color:#61243d;line-height:1.75;}
+.ministry-app-section h2,.word-of-god-section h2 {font-family:Georgia,serif;font-size:clamp(1.9rem,4vw,3rem);color:#74203f;}
+.ministry-eyebrow {letter-spacing:.16em;font-weight:bold;color:#9a6c37;font-size:.83rem;}
+.ministry-app-actions {display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:25px 0;}
+.ministry-app-actions a,.ministry-app-actions button,.word-of-god-section>a {display:inline-block;padding:12px 20px;border-radius:30px;border:1px solid #d5a960;background:#76203f;color:#fff8e9;text-decoration:none;font-size:1rem;font-weight:bold;cursor:pointer;}
+.ministry-app-actions button[hidden] {display:none;}
+.phone-instructions {text-align:left;max-width:720px;margin:20px auto;}
+.app-store-note {font-size:.85rem;color:#765d65;}
+.youtube-ministry {margin-top:24px;padding:18px;border-top:1px solid #dfc59f;}
+.word-of-god-section blockquote {font-family:Georgia,serif;font-size:clamp(1.1rem,2.5vw,1.4rem);font-style:italic;margin:18px auto;max-width:740px;color:#68223d;}
+.word-of-god-section h3 {font-family:Georgia,serif;color:#76203f;}
 </style>
 
 </head>
@@ -1502,6 +1519,35 @@ footer {
 
     </div>
 
+</section>
+
+<section class="ministry-app-section" id="take-gods-word">
+  <p class="ministry-eyebrow">✦ FAITH WHEREVER YOU GO ✦</p>
+  <h2>Take God's Word With You</h2>
+  <p>Keep Daily With God, the Prayer Room, and encouragement close to your heart. Add this ministry to your phone's home screen—free, with no app-store account needed.</p>
+  <div class="ministry-app-actions">
+    <button type="button" id="install-ministry-app" hidden>📲 Install In Spirit Motherhood</button>
+    <a href="#daily">📖 Open Daily With God</a>
+    <a href="#word-of-god">✝ Jesus Is the Word of God</a>
+  </div>
+  <div class="phone-instructions">
+    <p id="ios-install-help"><strong>Apple iPhone or iPad:</strong> Open this website in Safari, tap Share, then choose <strong>Add to Home Screen</strong>.</p>
+    <p id="android-install-help"><strong>Android:</strong> Open this website in Chrome, tap the menu (⋮), then choose <strong>Install app</strong> or <strong>Add to Home screen</strong>.</p>
+  </div>
+  <p class="app-store-note">This is a home-screen web app, not yet an Apple App Store or Google Play Store listing.</p>
+  <div class="youtube-ministry"><h3>Our YouTube Ministry</h3><p>Scripture teachings, prayer, and encouragement are coming to this space. We will add the official channel when it is ready.</p></div>
+</section>
+<section class="word-of-god-section" id="word-of-god">
+  <p class="ministry-eyebrow">✦ SCRIPTURE & REFLECTION ✦</p>
+  <h2>Jesus Is the Word of God</h2>
+  <blockquote>“In the beginning was the Word, and the Word was with God, and the Word was God.” — John 1:1 (KJV)</blockquote>
+  <blockquote>“And the Word was made flesh, and dwelt among us” — John 1:14 (KJV)</blockquote>
+  <p>God's Word is more than a message on a page. John's Gospel reveals Jesus Christ as the eternal Word who came to dwell among us. In Him we see God's love, truth, grace, and invitation to new life.</p>
+  <h3>Today's Reflection</h3>
+  <p>When you open Scripture, ask: What does this passage show me about Jesus? How can I follow His example in my home, my relationships, and my community?</p>
+  <h3>Let Us Pray</h3>
+  <p>Lord Jesus, living Word of God, open our hearts to Your truth. Teach us to walk in Your love, share Your compassion, and remain faithful in every season. In Your holy name, Amen.</p>
+  <a href="#daily">Continue With Today's Devotional</a>
 </section>
 
 <div class="about-box">
@@ -2899,6 +2945,14 @@ prayerVoice.pitch = 1;
 
 </script>
 
+<script>
+if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+let ministryInstallPrompt;
+const ministryInstallButton=document.getElementById('install-ministry-app');
+window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();ministryInstallPrompt=event;ministryInstallButton.hidden=false;});
+ministryInstallButton.addEventListener('click',async()=>{if(!ministryInstallPrompt)return;ministryInstallPrompt.prompt();await ministryInstallPrompt.userChoice;ministryInstallPrompt=null;ministryInstallButton.hidden=true;});
+window.addEventListener('appinstalled',()=>{ministryInstallPrompt=null;ministryInstallButton.hidden=true;});
+</script>
 </body>
     
 </html>
